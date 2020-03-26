@@ -300,7 +300,7 @@ Show All Tenders
 
 --------------------------------------------------------------------------------------------
 
-Show All Tenders
+Show All Katalogs
 ----
   Fetching all katalogs(Katalog)
 
