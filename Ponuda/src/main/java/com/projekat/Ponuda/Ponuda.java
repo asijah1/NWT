@@ -15,12 +15,26 @@ public class Ponuda {
   private Long idKorisnik;
   private Long ponuda;
 
+  //seteri
+  public void setIdKatalog(Long idKatalog) {
+    this.idKatalog = idKatalog;
+  }
+ 
+  public void setIdKorisnik(Long idKorisnik) {
+    this.idKorisnik = idKorisnik;
+  }
+  
+  public void setPonuda(Long ponuda) {
+    this.ponuda = ponuda;
+  }
+
+
   protected Ponuda() {}
 
   public Ponuda(Long idKatalog, Long idKorisnik, Long ponuda) {
-    this.idKatalog = idKatalog;
-    this.idKorisnik = idKorisnik;
-    this.ponuda = ponuda;
+    setIdKatalog(idKatalog);
+    setIdKorisnik(idKorisnik);
+    setPonuda(ponuda);
   }
 
   @Override
@@ -30,6 +44,7 @@ public class Ponuda {
         id, idKatalog, idKorisnik, ponuda);
   }
 
+  //geteri
   public Long getId() {
     return id;
   }

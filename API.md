@@ -205,3 +205,142 @@ curl http://localhost:8080/korisniks
 }
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Show All Tenders
+----
+  Fetching all tenders(Ponude)
+
+* **URL**
+
+  </ponudas>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+
+* **Data Params**
+
+
+* **Success Response:**
+
+
+{
+  "_embedded": {
+    "ponudas": [
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/ponudas/1"
+          },
+          "ponuda": {
+            "href": "http://localhost:8080/ponudas/1"
+          }
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/ponudas/2"
+          },
+          "ponuda": {
+            "href": "http://localhost:8080/ponudas/2"
+          }
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/ponudas/3"
+          },
+          "ponuda": {
+            "href": "http://localhost:8080/ponudas/3"
+          }
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/ponudas/4"
+          },
+          "ponuda": {
+            "href": "http://localhost:8080/ponudas/4"
+          }
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/ponudas/5"
+          },
+          "ponuda": {
+            "href": "http://localhost:8080/ponudas/5"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/ponudas"
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/ponudas"
+    },
+    "search": {
+      "href": "http://localhost:8080/ponudas/search"
+    }
+  }
+}
+
+* **Error Response:**
+-ubaciti pogrešan odgovor
+
+--------------------------------------------------------------------------------------------
+
+Show All Tenders
+----
+  Fetching all katalogs(Katalog)
+
+* **URL**
+
+  </katalog>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+
+* **Data Params**
+
+
+* **Success Response:**
+
+{
+  "_embedded": {
+    "katalog": []
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/katalog{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/katalog"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 0,
+    "totalPages": 0,
+    "number": 0
+  }
+}
+
+* **Error Response:**
+-ubaciti pogrešan odgovor
+
+-------------------------------------------------------------------------------------------------

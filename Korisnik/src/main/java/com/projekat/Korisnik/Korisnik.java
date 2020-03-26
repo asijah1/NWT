@@ -13,10 +13,11 @@ public class Korisnik {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    public void setId(Long id) {
+    //ovo nam ne treba, stringboot će ga automatski generirati i postaviti 
+    /*public void setId(Long id) { 
 		this.id = id;
 	}
-
+    */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -68,11 +69,11 @@ public class Korisnik {
     }
 
     public Korisnik(String firstName, String lastName, String location, String email, String phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.setLocation(location);
-        this.setEmail(email);
-        this.setPhone(phone);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setLocation(location);
+        setEmail(email);
+        setPhone(phone);
 
   }
 
