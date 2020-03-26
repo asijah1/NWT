@@ -7,17 +7,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+
 @Entity
 public class Korisnik {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //ovo nam ne treba, stringboot će ga automatski generirati i postaviti 
-    /*public void setId(Long id) { 
+    public void setId(Long id) {
 		this.id = id;
 	}
-    */
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -25,12 +32,23 @@ public class Korisnik {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	
+	@NotNull(message = "First name cannot be null")
 	private String firstName;
+	
+	@NotNull(message = "Last name cannot be null")
     private String lastName;
+	
+	@Size(min = 3, max = 50, message = "Location characters length has to be inbetween (3,50)")
     private String location;
+    
+    @Past(message = "Date should be in past")
     private Date birthDate;
+    
+    @Email(message = "Email should be valid")
     private String email;
+    
+    @Size(min = 9, max = 12, message = "Phone has to be 9-12 characters length")
     private String phone;
 
     protected Korisnik() {
@@ -69,11 +87,11 @@ public class Korisnik {
     }
 
     public Korisnik(String firstName, String lastName, String location, String email, String phone) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setLocation(location);
-        setEmail(email);
-        setPhone(phone);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.setLocation(location);
+        this.setEmail(email);
+        this.setPhone(phone);
 
   }
 
