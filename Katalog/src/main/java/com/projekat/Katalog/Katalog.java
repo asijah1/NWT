@@ -6,6 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+//potrebne za validaciju
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Katalog {
@@ -13,13 +24,22 @@ public class Katalog {
 @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
+  @NotNull(message = "Unesite naziv proizvoda")
   private String nazivProizvoda;
+  //dodatne informacije nisu obavezne
   private String dodatneInformacije;
+  @NotNull(message = "Unesite cijenu")
+  @Positive(message = "Unesite novu vrijednost cijene")
   private int cijena;
+  @PastOrPresent(message = "Neispravan datum objave") //datum rođenja mora biti u prošlosti
   private Date datumObjave; //ovaj tip podatka sadrži i vrijeme i datum
+  @PastOrPresent(message = "Neispravan datum završetka")
   private Date datumZavrsetka; //analogno prethodnom
+  //
   private Long podkategorijaId;
+  //
   private Long korisnikId;
+  //malo kompleksniji provjera, zavisi da li je aukcija završila ili ne
   private boolean zavrseno;
 
   //geteri i seteri
