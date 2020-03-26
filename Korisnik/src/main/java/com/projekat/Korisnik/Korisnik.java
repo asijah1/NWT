@@ -6,15 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//potrebne za validaciju
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
+
 
 @Entity
 public class Korisnik {
@@ -34,17 +26,12 @@ public class Korisnik {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-    @NotNull(message = "Unesite ime")
+    
     private String firstName;
-    @NotNull(message = "Unesite prezime")
     private String lastName;
-    @NotNull(message = "Unesite lokaciju")
     private String location;
-    @Past(message = "Neispravan datum rođenja") //datum rođenja mora biti u prošlosti
     private Date birthDate;
-    @Email(message = "Email adresa nije validna")
     private String email;
-    @NotNull(message = "Unesite kontakt telefon")
     private String phone;
 
     protected Korisnik() {
