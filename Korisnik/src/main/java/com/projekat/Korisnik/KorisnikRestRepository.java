@@ -13,5 +13,3 @@ public interface KorisnikRestRepository extends PagingAndSortingRepository<Koris
   List<Korisnik> findByFirstName(@Param("firstName") String name);
 
 }
-
-

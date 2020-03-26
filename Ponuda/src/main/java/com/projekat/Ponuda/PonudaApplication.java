@@ -25,6 +25,7 @@ public class PonudaApplication {
       repository.save(new Ponuda(2L, 1L, 12L));
       repository.save(new Ponuda(3L, 1L, 12L));
       repository.save(new Ponuda(4L, 1L, 11L));
+      repository.save(new Ponuda(5L, 2L, 13L));
 
       // fetch all customers
       log.info("Customers found with findAll():");
@@ -35,9 +36,9 @@ public class PonudaApplication {
       log.info("");
 
       // fetch an individual customer by ID
-      Ponuda customer = repository.findById(1L);
       log.info("Customer found with findById(1L):");
       log.info("--------------------------------");
+      Ponuda customer = repository.findById(1L);
       log.info(customer.toString());
       log.info("");
 
