@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-<<<<<<< HEAD
-=======
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Email;
->>>>>>> 8eb88351d19ae71f2ee25036a72c7e326dbd0600
 
 @Entity
 public class Korisnik {
@@ -35,16 +32,8 @@ public class Korisnik {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-<<<<<<< HEAD
     
     private String firstName;
-=======
-	
-	@NotNull(message = "First name cannot be null")
-	private String firstName;
-	
-	@NotNull(message = "Last name cannot be null")
->>>>>>> 8eb88351d19ae71f2ee25036a72c7e326dbd0600
     private String lastName;
 	
 	@Size(min = 3, max = 50, message = "Location characters length has to be inbetween (3,50)")
