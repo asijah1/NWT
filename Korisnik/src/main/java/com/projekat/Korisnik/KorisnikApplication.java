@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.projekat.Korisnik.model.Korisnik;
-import com.projekat.Korisnik.service.KorisnikRepository;
+import com.projekat.Korisnik.repository.KorisnikRepository;
 
 @SpringBootApplication
 public class KorisnikApplication {
@@ -16,7 +16,7 @@ public class KorisnikApplication {
   private static final Logger log = LoggerFactory.getLogger(KorisnikApplication.class);
 
   public static void main(String[] args) {
-    SpringApplication.run(KorisnikApplication.class);
+    SpringApplication.run(KorisnikApplication.class, args);
   }
 
   @Bean
@@ -38,9 +38,9 @@ public class KorisnikApplication {
       log.info("");
 
       // fetch an individual customer by ID
-      Korisnik customer = repository.findById(1L);
       log.info("Customer found with findById(1L):");
       log.info("--------------------------------");
+      Korisnik customer = repository.findById(1L);
       log.info(customer.toString());
       log.info("");
 

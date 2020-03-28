@@ -1,14 +1,14 @@
-package com.projekat.Korisnik.service;
+package com.projekat.Korisnik.repository;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
-
 import com.projekat.Korisnik.model.Korisnik;
 
 public interface KorisnikRepository extends CrudRepository<Korisnik, Long> {
 
-  List<Korisnik> findByLastName(String lastName);
-
+  ArrayList<Korisnik> findByLastName(String lastName);
+  ArrayList<Korisnik> findByFirstName(String firstName);
   Korisnik findById(long id);
+  
 }
