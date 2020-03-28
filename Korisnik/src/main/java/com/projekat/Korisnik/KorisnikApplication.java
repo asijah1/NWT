@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.projekat.Korisnik.model.Korisnik;
+import com.projekat.Korisnik.service.KorisnikRepository;
+
 @SpringBootApplication
 public class KorisnikApplication {
 

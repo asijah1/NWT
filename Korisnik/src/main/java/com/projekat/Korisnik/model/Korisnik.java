@@ -1,4 +1,4 @@
-package com.projekat.Korisnik;
+package com.projekat.Korisnik.model;
 
 import java.util.Date;
 

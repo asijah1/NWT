@@ -1,8 +1,10 @@
-package com.projekat.Ponuda;
+package com.projekat.Ponuda.service;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+
+import com.projekat.Ponuda.model.Ponuda;
 
 public interface PonudaRepository extends CrudRepository<Ponuda, Long> {
 

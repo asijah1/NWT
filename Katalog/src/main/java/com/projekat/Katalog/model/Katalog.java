@@ -1,4 +1,4 @@
-package com.projekat.Katalog;
+package com.projekat.Katalog.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.projekat.Ponuda;
+package com.projekat.Ponuda.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
