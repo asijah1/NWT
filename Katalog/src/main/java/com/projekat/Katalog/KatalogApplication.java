@@ -27,11 +27,11 @@ public class KatalogApplication {
 		return (args) -> {
 	      // save a few catalogs
 	      repository.save(new Katalog("mobitel", "dodatneInformacije", 250, null, null, 1L, 2L, true));
-	      repository.save(new Katalog("auto", "dodatneInformacije", 250, null, null, 1L, 2L, true));
-	      repository.save(new Katalog("avion", "dodatneInformacije", 250, null, null, 1L, 2L, true));
-	      repository.save(new Katalog("kamion", "dodatneInformacije", 250, null, null, 1L, 2L, true));
-	      repository.save(new Katalog("jahta", "dodatneInformacije", 250, null, null, 1L, 2L, true));
-	      repository.save(new Katalog("voz", "dodatneInformacije", 250, null, null, 1L, 2L, true));
+	      repository.save(new Katalog("auto", "dodatneInformacije", 5500, null, null, 3L, 4L, true));
+	      repository.save(new Katalog("avion", "dodatneInformacije", 1000000, null, null, 5L, 6L, true));
+	      repository.save(new Katalog("kamion", "dodatneInformacije", 20000, null, null, 7L, 8L, true));
+	      repository.save(new Katalog("jahta", "dodatneInformacije", 1000000, null, null, 9L, 10L, true));
+	      repository.save(new Katalog("voz", "dodatneInformacije", 50000, null, null, 11L, 12L, true));
 
 	      // fetch all catalogs
 	      log.info("Katalogs found with findAll():");

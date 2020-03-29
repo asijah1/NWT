@@ -15,5 +15,5 @@ public interface KatalogRepository extends CrudRepository<Katalog, Long> {
   
   Katalog findById(long id);
   
-  public Katalog save(Katalog katalog);
+  //public Katalog save(Katalog katalog);
 }
