@@ -116,9 +116,9 @@ public void setId(Long id) {
 
   protected Katalog() {}
 	
-  public Katalog( String nazivProizvoda, String dodatneInformacije, int cijena, Date datumObjave,
+  public Katalog(String nazivProizvoda, String dodatneInformacije, int cijena, Date datumObjave,
 			Date datumZavrsetka, Long podkategorijaId, Long korisnikId, boolean zavrseno) {
-		super();
+		//super();
 		setNazivProizvoda(nazivProizvoda);
 		setDodatneInformacije(dodatneInformacije);
 		setCijena(cijena);

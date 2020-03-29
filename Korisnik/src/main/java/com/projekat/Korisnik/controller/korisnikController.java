@@ -32,6 +32,7 @@ public class korisnikController {
 	
 	@GetMapping("/lastName")
 	public ArrayList<Korisnik> findByLastName(@PathVariable String lastName) {
+		//Long temp = Long.parseLong(lastName); //provjeriti poslije
 		return korisnikService.findByLastName(lastName);
 	}
 	
@@ -47,7 +48,7 @@ public class korisnikController {
     }
 	
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id")
     public void deleteKorisnik(@PathVariable String id) {
         Long korisnikId = Long.parseLong(id);
         korisnikService.deleteById(korisnikId);
