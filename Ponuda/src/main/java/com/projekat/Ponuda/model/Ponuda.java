@@ -59,15 +59,15 @@ public class Ponuda {
     return id;
   }
 
-  public Long idKatalog() {
+  public Long getidKatalog() {
     return idKatalog;
   }
 
-  public Long idKorisnik() {
+  public Long getidKorisnik() {
     return idKorisnik;
   }
   
-  public Long ponuda() {
+  public Long getPonuda() {
 	    return ponuda;
 	  }
 }

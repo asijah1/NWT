@@ -1,4 +1,4 @@
-package com.projekat.Ponuda.service;
+package com.projekat.Ponuda.repository;
 
 import java.util.List;
 
