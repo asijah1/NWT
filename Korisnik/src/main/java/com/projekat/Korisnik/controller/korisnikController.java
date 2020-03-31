@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("Korisnik/korisniks")
+@RequestMapping("korisnici")
 @RestController
 public class korisnikController {
 	
@@ -44,9 +44,13 @@ public class korisnikController {
 	@PostMapping("/korisnik")
     Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
-		return korisnikService.addNewKorisnik(korisnik.getFirstName(), korisnik.getLastName(), korisnik.getLocation(), korisnik.getEmail(), korisnik.getPhone());
+		return korisnikService.createKorisnik(korisnik.getFirstName(), korisnik.getLastName(), korisnik.getLocation(), korisnik.getEmail(), korisnik.getPhone());
     }
 	
+	@PutMapping("/id")
+	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @PathVariable Long id) {
+		return korisnikService.updateKorisnik(korisnik);
+	}
 
     @DeleteMapping("/id")
     public void deleteKorisnik(@PathVariable String id) {

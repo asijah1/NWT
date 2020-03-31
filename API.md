@@ -1,4 +1,4 @@
-Show All Users
+﻿Show All Users
 ----
   Fetching all users(Korisnici)
 
@@ -344,3 +344,61 @@ Show All Katalogs
 -ubaciti pogrešan odgovor
 
 -------------------------------------------------------------------------------------------------
+
+Update user
+----
+  Update user with id
+
+* **URL**
+
+  </korisniks/id>
+
+* **Method:**
+
+  `PUT` 
+
+*  **URL Params**
+ <id>
+* **Data Params**
+ <korisnik>
+
+* **Success Response:**
+
+ {
+  "firstName": "Sijah",
+  "lastName": "Amir",
+  "location": "Travnik",
+  "birthDate": null,
+  "email": "asijah1@etf.unsa.ba",
+  "phone": "062111222",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/korisniks/1"
+    },
+    "korisnik": {
+      "href": "http://localhost:8080/korisniks/1"
+    }
+  }
+}
+ 
+* **Error Response:**
+* **Sample Call:**
+curl -X PUT -H "Content-Type: application/json" -d "{""id"":1,""lastName"":""Amir"",""location"":""Travnik"",""email"":""asijah1@etf.unsa.ba"",""phone"":""062111222""}"  "http://localhost:8080/korisniks/1"
+{
+  "firstName" : null,
+  "lastName" : "Amir",
+  "location" : "Travnik",
+  "birthDate" : null,
+  "email" : "asijah1@etf.unsa.ba",
+  "phone" : "062111222",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/korisniks/1"
+    },
+    "korisnik" : {
+      "href" : "http://localhost:8080/korisniks/1"
+    }
+  }
+}
+* **Notes:**
+  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 

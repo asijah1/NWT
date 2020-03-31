@@ -1,5 +1,7 @@
 package com.projekat.Korisnik;
 
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.repository.KorisnikRepository;
+
 
 @SpringBootApplication
 public class KorisnikApplication {

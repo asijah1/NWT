@@ -1,5 +1,6 @@
 package com.projekat.Korisnik.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -39,9 +40,6 @@ public class Korisnik {
 	@Size(min = 3, max = 50, message = "Location characters length has to be inbetween (3,50)")
     private String location;
     
-    @Past(message = "Date should be in past")
-    private Date birthDate;
-    
     @Email(message = "Email should be valid")
     private String email;
     
@@ -67,13 +65,6 @@ public class Korisnik {
         this.email = email;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
 
     public String getLocation() {
         return location;
@@ -89,12 +80,10 @@ public class Korisnik {
         this.setLocation(location);
         this.setEmail(email);
         this.setPhone(phone);
-
   }
 
   @Override
   public String toString() {
-      //treba dodati datum
       return String.format("Customer[id=%d, firstName='%s', lastName='%s', location='%s', email='%s', phone='%s']", id, firstName, lastName, location, email, phone);
   }
 
