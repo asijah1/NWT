@@ -1,10 +1,7 @@
 package com.projekat.Ponuda.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.projekat.Ponuda.model.Ponuda;
 import com.projekat.Ponuda.repository.PonudaRepository;
 
@@ -30,6 +27,11 @@ public class PonudaService {
 		return ponudaRepository.save(new Ponuda(1L, 2L, 3L));
 	}
 	 */
+	
+	public Ponuda updateKatalog(Ponuda ponuda) {
+		return ponudaRepository.save(ponuda);
+	}
+	
 	public void deleteById(Long ponudaId) {
         ponudaRepository.deleteById(ponudaId);
     }

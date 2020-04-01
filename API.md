@@ -466,3 +466,57 @@ curl -X PUT -H "Content-Type: application/json" -d "{""nazivProizvoda"":""auto""
 }
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+
+-------------------------------------------------------------------------------------------------
+
+Update ponuda
+----
+  Update ponuda with id
+
+* **URL**
+
+  </ponudas/id>
+
+* **Method:**
+
+  `PUT` 
+
+*  **URL Params**
+ <id>
+* **Data Params**
+ <katalog>
+
+* **Success Response:**
+
+{
+  "idKatalog" : 1,
+  "idKorisnik" : 1,
+  "ponuda" : 115,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/ponudas/1"
+    },
+    "ponuda" : {
+      "href" : "http://localhost:8080/ponudas/1"
+    }
+  }
+}
+ 
+* **Error Response:**
+* **Sample Call:**
+curl -X PUT -H "Content-Type: application/json" -d "{""idKatalog"":1,""idKorisnik"":1,""ponuda"":115}"  "http://localhost:8080/ponudas/1"
+{
+  "idKatalog" : 1,
+  "idKorisnik" : 1,
+  "ponuda" : 115,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/ponudas/1"
+    },
+    "ponuda" : {
+      "href" : "http://localhost:8080/ponudas/1"
+    }
+  }
+}
+* **Notes:**
+  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 

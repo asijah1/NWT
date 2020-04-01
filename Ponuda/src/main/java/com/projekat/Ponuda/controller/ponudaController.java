@@ -1,19 +1,12 @@
 package com.projekat.Ponuda.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.projekat.Ponuda.model.Ponuda;
 import com.projekat.Ponuda.service.PonudaService;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +31,10 @@ public class ponudaController {
 		return ponudaService.addNewPonuda(ponuda.getidKatalog(), ponuda.getidKorisnik(), ponuda.getPonuda());
     }
 	
+	@PutMapping("/id")
+	Ponuda replaceKatalog(@RequestBody Ponuda ponuda, @PathVariable Long id) {
+		return ponudaService.updateKatalog(ponuda);
+	}
 
     @DeleteMapping("/id")
     public void deletePonuda(@PathVariable String id) {
