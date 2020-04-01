@@ -402,3 +402,67 @@ curl -X PUT -H "Content-Type: application/json" -d "{""id"":1,""lastName"":""Ami
 }
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+
+-------------------------------------------------------------------------------------------------
+
+Update katalog
+----
+  Update katalog with id
+
+* **URL**
+
+  </katalogs/id>
+
+* **Method:**
+
+  `PUT` 
+
+*  **URL Params**
+ <id>
+* **Data Params**
+ <katalog>
+
+* **Success Response:**
+
+{
+  "nazivProizvoda" : "auto",
+  "dodatneInformacije" : "dodatneInformacije-Dodano",
+  "cijena" : 3501,
+  "datumObjave" : null,
+  "datumZavrsetka" : null,
+  "podkategorijaId" : 1,
+  "korisnikId" : 2,
+  "zavrseno" : false,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/katalogs/1"
+    },
+    "katalog" : {
+      "href" : "http://localhost:8080/katalogs/1"
+    }
+  }
+}
+ 
+* **Error Response:**
+* **Sample Call:**
+curl -X PUT -H "Content-Type: application/json" -d "{""nazivProizvoda"":""auto"",""dodatneInformacije"":""dodatneInformacije-Dodano"",""cijena"":3501,""datumObjave"":null,""datumZavrsetka"":null,""podkategorijaId"":1,""korisnikId"":2,""zavrseno"": false}"  "http://localhost:8080/katalogs/1"
+{
+  "nazivProizvoda" : "auto",
+  "dodatneInformacije" : "dodatneInformacije-Dodano",
+  "cijena" : 3501,
+  "datumObjave" : null,
+  "datumZavrsetka" : null,
+  "podkategorijaId" : 1,
+  "korisnikId" : 2,
+  "zavrseno" : false,
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/katalogs/1"
+    },
+    "katalog" : {
+      "href" : "http://localhost:8080/katalogs/1"
+    }
+  }
+}
+* **Notes:**
+  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 

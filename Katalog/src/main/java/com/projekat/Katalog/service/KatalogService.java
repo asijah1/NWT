@@ -1,11 +1,8 @@
 package com.projekat.Katalog.service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.projekat.Katalog.model.Katalog;
 import com.projekat.Katalog.repository.KatalogRepository;
 
@@ -33,6 +30,11 @@ public class KatalogService {
 		return korisnikRepository.save(new Korisnik("Amir", "Sijah", "Travnik", "amir.sijah@gmail.com", "06108044"));
 	}
 	 */
+	
+	public Katalog updateKatalog(Katalog katalog) {
+		return katalogRepository.save(katalog);
+	}
+	
 	public void deleteById(Long katalogId) {
         katalogRepository.deleteById(katalogId);
     }
