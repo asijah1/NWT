@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.projekat.Katalog.KatalogApplication;
 import com.projekat.Katalog.model.Katalog;
