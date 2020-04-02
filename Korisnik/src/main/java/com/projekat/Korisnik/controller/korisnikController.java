@@ -24,7 +24,7 @@ public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
-
+	
 	@GetMapping("/firstName")
 	public ArrayList<Korisnik> findByFirstName(@PathVariable String firstName) {  
 		return korisnikService.findByFirstName(firstName);
