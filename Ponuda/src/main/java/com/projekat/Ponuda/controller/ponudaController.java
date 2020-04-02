@@ -25,10 +25,10 @@ public class ponudaController {
 		return ponudaService.findById(id);
 	}
 	
-	@PostMapping("/ponuda")
+	@PostMapping("")
     Ponuda newPonuda(@RequestBody Ponuda ponuda) {
         //return ponudaService.save(ponuda);
-		return ponudaService.addNewPonuda(ponuda.getidKatalog(), ponuda.getidKorisnik(), ponuda.getPonuda());
+		return ponudaService.addNewPonuda(ponuda);
     }
 	
 	@PutMapping("/id")

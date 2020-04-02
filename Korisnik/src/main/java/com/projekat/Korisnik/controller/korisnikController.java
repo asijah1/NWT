@@ -41,7 +41,7 @@ public class korisnikController {
 		return korisnikService.findById(id);
 	}
 	
-	@PostMapping("/korisnik")
+	@PostMapping("")
     Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
 		return korisnikService.createKorisnik(korisnik.getFirstName(), korisnik.getLastName(), korisnik.getLocation(), korisnik.getEmail(), korisnik.getPhone());
@@ -49,7 +49,7 @@ public class korisnikController {
 	
 	@PutMapping("/id")
 	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @PathVariable Long id) {
-		return korisnikService.updateKorisnik(korisnik);
+		return korisnikService.updateKorisnik(korisnik, id);
 	}
 
     @DeleteMapping("/id")

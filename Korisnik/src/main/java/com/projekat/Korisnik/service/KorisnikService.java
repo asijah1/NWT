@@ -36,7 +36,9 @@ public class KorisnikService {
 	}
 	 */
 	
-	public Korisnik updateKorisnik(Korisnik korisnik) {
+	public Korisnik updateKorisnik(Korisnik korisnik, Long id) {
+		//Long temp = Long.parseLong(id);
+		korisnikRepository.findById(id).orElseThrow(); //ako ne pronadje korisnika sa datim id-em bacit će izuzetak
 		return korisnikRepository.save(korisnik);
 	}
 	

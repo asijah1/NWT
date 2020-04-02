@@ -19,8 +19,8 @@ public class PonudaService {
         return ponudaRepository.save(new Ponuda(idKatalog, idKorisnik, ponuda));
     }
 	
-	public Ponuda addNewPonuda(Long idKatalog, Long idKorisnik, Long ponuda) {
-		return ponudaRepository.save(new Ponuda(idKatalog, idKorisnik, ponuda));
+	public Ponuda addNewPonuda(Ponuda ponuda) {
+		return ponudaRepository.save(new Ponuda(ponuda.getidKatalog(), ponuda.getidKorisnik(), ponuda.getPonuda()));
 	}
 	/*
 	public Ponuda save(Ponuda novi) {

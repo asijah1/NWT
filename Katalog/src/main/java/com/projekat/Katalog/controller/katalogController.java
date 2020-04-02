@@ -19,24 +19,21 @@ public class katalogController {
 	@Autowired
 	private KatalogService katalogService;
 
-	
 	@GetMapping("/id")
 	public Katalog findById(@PathVariable Long id) {
 		return katalogService.findById(id);
 	}
 	
-	@PostMapping("/katalog")
-    Katalog newKatalog(@RequestBody Katalog katalog) {
+	@PostMapping("")
+    Katalog newKatalog(@RequestBody Katalog katalog, @PathVariable Long id) {
         //return katalogService.save(katalog);
-		return katalogService.addNewKatalog(katalog.getNazivProizvoda(), katalog.getDodatneInformacije(), katalog.getCijena(), katalog.getDatumObjave(), 
-				katalog.getDatumZavrsetka(), katalog.getPodkategorijaId(), katalog.getKorisnikId(), katalog.isZavrseno());
+		return katalogService.addNewKatalog(katalog);
     }
 	
 	@PutMapping("/id")
 	Katalog replaceKatalog(@RequestBody Katalog katalog, @PathVariable Long id) {
 		return katalogService.updateKatalog(katalog);
 	}
-	
 	
     @DeleteMapping("/id")
     public void deleteKatalog(@PathVariable String id) {
