@@ -3,12 +3,14 @@ package com.projekat.Katalog.exception;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -93,8 +95,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 	}
 	*/
 	
-	
-	
 	//
 	
 	@Override
@@ -172,13 +172,32 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 	    assertTrue(error.getErrors().get(0).contains("media type is not supported"));
 	 } 
 	*/
-	//
 	
+	//defaultni
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
 	    ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "error occurred");
 	    return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 	
-	//
+	//naknadno dodane - možda već postoje slične
+	@Override
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+		String error = "Malformed JSON request";
+		return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
+	}
+
+	 private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
+	     return new ResponseEntity<>(apiError, apiError.getStatus());
+	 }
+
+	 @ExceptionHandler(EntityNotFoundException.class)
+	 protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex) {
+		 ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
+	     apiError.setMessage(ex.getMessage());
+	     return buildResponseEntity(apiError);
+	 }
+	   
+	   
+	   
 }
