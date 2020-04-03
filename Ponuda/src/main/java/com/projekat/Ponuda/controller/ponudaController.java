@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("Korisnik/korisniks")
+@RequestMapping("Ponuda/ponude")
 @RestController
 public class ponudaController {
 	

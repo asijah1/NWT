@@ -4,21 +4,18 @@ import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.service.KorisnikService;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("korisnici")
+@RequestMapping("Korisnik/korisnici")
 @RestController
 public class korisnikController {
 	
@@ -44,12 +41,12 @@ public class korisnikController {
 	@PostMapping("")
     Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
-		return korisnikService.createKorisnik(korisnik.getFirstName(), korisnik.getLastName(), korisnik.getLocation(), korisnik.getEmail(), korisnik.getPhone());
+		return korisnikService.createKorisnik(korisnik);
     }
 	
 	@PutMapping("/id")
 	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @PathVariable Long id) {
-		return korisnikService.updateKorisnik(korisnik, id);
+		return korisnikService.updateKorisnik(korisnik);
 	}
 
     @DeleteMapping("/id")

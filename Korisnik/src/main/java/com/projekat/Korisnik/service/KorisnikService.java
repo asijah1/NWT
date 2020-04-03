@@ -5,8 +5,6 @@ import com.projekat.Korisnik.service.KorisnikService;
 import com.projekat.Korisnik.repository.KorisnikRepository;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +25,8 @@ public class KorisnikService {
 		return korisnikRepository.findByLastName(lastName);
 	}
 	
-	public Korisnik createKorisnik(String firstName, String lastName, String location, String email, String phone){
-        return korisnikRepository.save(new Korisnik(firstName, lastName, location, email, phone));
+	public Korisnik createKorisnik(Korisnik korisnik){
+        return korisnikRepository.save(new Korisnik(korisnik.getFirstName(), korisnik.getLastName(), korisnik.getLocation(), korisnik.getEmail(), korisnik.getPhone()));
     }
 	/*
 	public Korisnik save(Korisnik novi) {
@@ -36,9 +34,9 @@ public class KorisnikService {
 	}
 	 */
 	
-	public Korisnik updateKorisnik(Korisnik korisnik, Long id) {
+	public Korisnik updateKorisnik(Korisnik korisnik) {
 		//Long temp = Long.parseLong(id);
-		korisnikRepository.findById(id).orElseThrow(); //ako ne pronadje korisnika sa datim id-em bacit će izuzetak
+		//korisnikRepository.findById(id).orElseThrow(); //ako ne pronadje korisnika sa datim id-em bacit će izuzetak
 		return korisnikRepository.save(korisnik);
 	}
 	

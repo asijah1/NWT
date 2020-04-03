@@ -21,7 +21,7 @@ import javax.validation.constraints.Positive;
 @Entity
 public class Katalog {
 
-@Id
+  @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
   @NotNull(message = "Unesite naziv proizvoda")
@@ -31,7 +31,7 @@ public class Katalog {
   @NotNull(message = "Unesite cijenu")
   @Positive(message = "Unesite novu vrijednost cijene")
   private int cijena;
-  @PastOrPresent(message = "Neispravan datum objave") //datum rođenja mora biti u prošlosti
+  @PastOrPresent(message = "Neispravan datum objave")
   private Date datumObjave; //ovaj tip podatka sadrži i vrijeme i datum
   @PastOrPresent(message = "Neispravan datum završetka")
   private Date datumZavrsetka; //analogno prethodnom

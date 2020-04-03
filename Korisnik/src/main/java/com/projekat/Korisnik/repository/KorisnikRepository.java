@@ -1,7 +1,6 @@
 package com.projekat.Korisnik.repository;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import com.projekat.Korisnik.model.Korisnik;
 

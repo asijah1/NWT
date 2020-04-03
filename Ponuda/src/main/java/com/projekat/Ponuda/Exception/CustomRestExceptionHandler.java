@@ -1,4 +1,4 @@
-package com.projekat.Katalog.exception;
+package com.projekat.Ponuda.Exception;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +17,15 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
 @ControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
-	
+
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 	    List<String> errors = new ArrayList<String>();
@@ -92,8 +89,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 	    assertTrue(error.getErrors().get(0).contains("should be of type"));
 	}
 	*/
-	
-	
 	
 	//
 	

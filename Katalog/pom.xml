@@ -82,10 +82,16 @@
 		</dependency>
  
 		<dependency>
-   			 <groupId>org.glassfish.web</groupId>
-    			<artifactId>javax.el</artifactId>
-    			<version>2.2.6</version>
+   			<groupId>org.glassfish.web</groupId>
+    		<artifactId>javax.el</artifactId>
+    		<version>2.2.6</version>
 		</dependency>
+		
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>
@@ -116,5 +122,6 @@
 			<url>https://repo.spring.io/milestone</url>
 		</repository>
 	</repositories>
+	
 
 </project>
