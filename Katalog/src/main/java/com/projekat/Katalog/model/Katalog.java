@@ -6,19 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 //potrebne za validaciju
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 
 @Entity
+@Table(name = "katalog")
 public class Katalog {
 
   @Id
@@ -113,6 +108,10 @@ public void setId(Long id) {
 	this.id = id;
 }
 */
+
+public Long getId() {
+	return id;
+}
 
   protected Katalog() {}
 	

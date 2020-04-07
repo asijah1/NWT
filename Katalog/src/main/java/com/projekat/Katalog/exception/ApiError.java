@@ -18,14 +18,14 @@ public class ApiError {
     private List<String> errors;
 	private String debugMessage;
  
-    public ApiError() {
-    	super();
+    private ApiError() {
         timestamp = LocalDateTime.now();
     }
     
     public ApiError(HttpStatus status) {
         super();
         this.status = status;
+        this.timestamp = LocalDateTime.now();
     }
     
     public ApiError(HttpStatus status, String message, List<String> errors) {
@@ -33,12 +33,14 @@ public class ApiError {
         this.setStatus(status);
         this.setMessage(message);
         this.setErrors(errors);
+        this.timestamp = LocalDateTime.now();
     }
  
     public ApiError(HttpStatus status, String message, String error) {
         super();
         this.setStatus(status);
         this.setMessage(message);
+        this.timestamp = LocalDateTime.now();
         setErrors(Arrays.asList(error));
     }
     
@@ -46,6 +48,7 @@ public class ApiError {
         super();
         this.setStatus(status);
         this.setMessage(message);
+        this.timestamp = LocalDateTime.now();
         this.setDebugMessage(ex.getLocalizedMessage());
     }
 
