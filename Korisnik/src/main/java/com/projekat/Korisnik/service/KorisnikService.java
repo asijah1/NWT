@@ -1,10 +1,13 @@
 package com.projekat.Korisnik.service;
 
+import com.projekat.Korisnik.exception.KorisnikException;
 import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.service.KorisnikService;
 import com.projekat.Korisnik.repository.KorisnikRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +16,39 @@ public class KorisnikService {
 	
 	@Autowired
 	private KorisnikRepository korisnikRepository;
+	List<Korisnik> bazaKorisnika;
 
-	public Korisnik findById(Long id) {
-		return korisnikRepository.findById(id).orElseThrow();
+	public Korisnik findById(Long id) throws KorisnikException{
+		return korisnikRepository.findById(id).orElseThrow(() -> new KorisnikException(""));
 	}
+	
+	public List<Korisnik> vratiKorisnike() throws KorisnikException {
+        if (korisnikRepository.count() == 0) {
+            throw new KorisnikException("Nema korisnika u bazi");
+        }
+        List<Korisnik> bazaKorisnika = new ArrayList<>();
+        korisnikRepository.findAll().forEach(bazaKorisnika::add);
+        return bazaKorisnika;
+    }
 
-	public ArrayList<Korisnik> findByFirstName(String firstName) {
-		return korisnikRepository.findByFirstName(firstName);
+	public Korisnik findByFirstName(String firstName) throws KorisnikException{
+		bazaKorisnika = vratiKorisnike();
+		List<Korisnik> temp;
+        for (Korisnik korisnik : bazaKorisnika) {
+            if (korisnik.getFirstName() != null && korisnik.getFirstName().equals(firstName)) {
+                return korisnik;
+            }
+        }
+        throw new KorisnikException("Traženi korisnik ne postoji");
 	}
-	public ArrayList<Korisnik> findByLastName(String lastName) {
-		return korisnikRepository.findByLastName(lastName);
+	public Korisnik findByLastName(String lastName) throws KorisnikException{
+		bazaKorisnika = vratiKorisnike();
+        for (Korisnik korisnik : bazaKorisnika) {
+            if (korisnik.getLastName() != null && korisnik.getLastName().equals(lastName)) {
+                return korisnik;
+            }
+        }
+        throw new KorisnikException("Traženi korisnik ne postoji");
 	}
 	
 	public Korisnik createKorisnik(Korisnik korisnik){

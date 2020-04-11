@@ -23,12 +23,12 @@ public class korisnikController {
 	
 	@RequestMapping(path = "/korisnici/ime", method = RequestMethod.GET)
 	@ResponseBody
-	public ArrayList<Korisnik> findByFirstName(@RequestParam String firstName) {  
+	public Korisnik findByFirstName(@RequestParam String firstName) {  
 		return korisnikService.findByFirstName(firstName);
 	}
 	
 	@RequestMapping(path = "/korisnici/prezime", method = RequestMethod.GET)
-	public ArrayList<Korisnik> findByLastName(@PathVariable String lastName) {
+	public Korisnik findByLastName(@PathVariable String lastName) {
 		//Long temp = Long.parseLong(lastName); //provjeriti poslije
 		return korisnikService.findByLastName(lastName);
 	}

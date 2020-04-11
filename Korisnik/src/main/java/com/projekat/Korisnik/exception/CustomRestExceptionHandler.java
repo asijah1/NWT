@@ -1,8 +1,11 @@
 package com.projekat.Korisnik.exception;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
@@ -22,6 +25,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import net.minidev.json.JSONObject;
+
 @ControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 
@@ -31,11 +36,8 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
     }
 	
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(
-	  MethodArgumentNotValidException ex, 
-	  HttpHeaders headers, 
-	  HttpStatus status, 
-	  WebRequest request) {
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, 
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
 	    List<String> errors = new ArrayList<String>();
 	    for (FieldError error : ex.getBindingResult().getFieldErrors()) {
 	        errors.add(error.getField() + ": " + error.getDefaultMessage());
@@ -182,9 +184,15 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
-	    ApiError apiError = new ApiError(
-	      HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "error occurred");
+	    ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "error occurred");
 	    return new ResponseEntity<Object>(
 	      apiError, new HttpHeaders(), apiError.getStatus());
 	}
+	
+	@ExceptionHandler({KorisnikException.class})
+    public ResponseEntity<Object> handleNoHandlerFoundException(Exception ex, WebRequest request) throws IOException {
+		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "error occurred");
+        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+	
 }
