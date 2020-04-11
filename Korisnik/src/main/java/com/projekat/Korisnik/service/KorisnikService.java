@@ -19,7 +19,7 @@ public class KorisnikService {
 	List<Korisnik> bazaKorisnika;
 
 	public Korisnik findById(Long id) throws KorisnikException{
-		return korisnikRepository.findById(id).orElseThrow(() -> new KorisnikException(""));
+		return korisnikRepository.findById(id).orElseThrow(() -> new KorisnikException(id));
 	}
 	
 	public List<Korisnik> vratiKorisnike() throws KorisnikException {

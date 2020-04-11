@@ -15,18 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("/korisnici")
+
 @RestController
+@RequestMapping("/korisnici")
 public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	@RequestMapping(value = "id", method = RequestMethod.GET)
 	@ResponseBody
-	public Korisnik findById(@RequestParam String id) {
+	public Korisnik vratiKorisnika(@RequestParam String id) {
 		Long korisnikId = Long.parseLong(id);
 		return korisnikService.findById(korisnikId);
 	}
@@ -43,6 +45,7 @@ public class korisnikController {
 		return korisnikService.findByFirstName(firstName);
 	}
 	
+	
 	@RequestMapping(value = "/prezime", method = RequestMethod.GET)
 	@ResponseBody
 	public Korisnik findByLastName(@RequestParam String lastName) {
@@ -50,8 +53,7 @@ public class korisnikController {
 		return korisnikService.findByLastName(lastName);
 	}
 	
-	
-	@PostMapping("/korisnici")
+	@PostMapping("")
     Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
 		return korisnikService.createKorisnik(korisnik);
@@ -61,7 +63,7 @@ public class korisnikController {
 	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @PathVariable Long id) {
 		return korisnikService.updateKorisnik(korisnik);
 	}
-
+	
 	@RequestMapping(value = "/id", method = RequestMethod.DELETE)
     public void deleteKorisnik(@PathVariable String id) {
         Long korisnikId = Long.parseLong(id);
