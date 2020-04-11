@@ -2,7 +2,6 @@ package com.projekat.Korisnik.controller;
 
 import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.service.KorisnikService;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,30 +14,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+@RequestMapping("/korisnici")
 @RestController
 public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	@RequestMapping(path = "/korisnici/ime", method = RequestMethod.GET)
+	@RequestMapping(value = "/ime", method = RequestMethod.GET)
 	@ResponseBody
 	public Korisnik findByFirstName(@RequestParam String firstName) {  
 		return korisnikService.findByFirstName(firstName);
 	}
 	
-	@RequestMapping(path = "/korisnici/prezime", method = RequestMethod.GET)
-	public Korisnik findByLastName(@PathVariable String lastName) {
+	@RequestMapping(value = "/prezime", method = RequestMethod.GET)
+	@ResponseBody
+	public Korisnik findByLastName(@RequestParam String lastName) {
 		//Long temp = Long.parseLong(lastName); //provjeriti poslije
 		return korisnikService.findByLastName(lastName);
 	}
 	
-	@RequestMapping(path = "/korisnici/id", method = RequestMethod.GET)
-	public Korisnik findById(@PathVariable Long id) {
-		return korisnikService.findById(id);
-	}
 	
-	@PostMapping("")
+	@PostMapping("/korisnici")
     Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
 		return korisnikService.createKorisnik(korisnik);
