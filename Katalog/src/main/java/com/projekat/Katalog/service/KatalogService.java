@@ -1,6 +1,9 @@
 package com.projekat.Katalog.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,12 @@ public class KatalogService {
 	@Autowired
 	private KatalogRepository katalogRepository;
 
+	public List<Katalog> vratiKataloge()  {
+        List<Katalog> bazaKataloga = new ArrayList<>();
+        katalogRepository.findAll().forEach(bazaKataloga::add);
+        return bazaKataloga;
+    }
+	
 	public Katalog findById(Long katalogId) throws KatalogException {
 		if(!katalogRepository.existsById(katalogId)) {
 			throw new KatalogException();

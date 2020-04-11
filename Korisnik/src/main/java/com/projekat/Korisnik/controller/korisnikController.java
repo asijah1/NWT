@@ -33,6 +33,12 @@ public class korisnikController {
 		return korisnikService.findById(korisnikId);
 	}
 	
+	@RequestMapping(value = "/korisnikSaId", method = RequestMethod.GET)
+	public Korisnik findByLastName(@RequestParam Long id) {
+		//Long temp = Long.parseLong(lastName); //provjeriti poslije
+		return korisnikService.findById(id);
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Korisnik> vratiSveKorisnike() {  
