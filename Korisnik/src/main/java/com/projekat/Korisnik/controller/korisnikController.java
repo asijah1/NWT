@@ -56,7 +56,7 @@ public class korisnikController {
 		return korisnikService.updateKorisnik(korisnik);
 	}
 
-	@DeleteMapping("")
+	@DeleteMapping("/id")
     public void deleteKorisnik(@PathVariable String id) {
         Long korisnikId = Long.parseLong(id);
         korisnikService.deleteKorisnikWithId(korisnikId);
