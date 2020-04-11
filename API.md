@@ -16,7 +16,7 @@
 
 
 * **Success Response:**
-
+```json
   {
   "_embedded" : {
     "korisniks" : [ {
@@ -108,10 +108,11 @@
     }
   }
 }
- 
+```
 * **Error Response:**
 * **Sample Call:**
 curl http://localhost:8080/korisniks
+```json
  {
   "_embedded" : {
     "korisniks" : [ {
@@ -203,6 +204,7 @@ curl http://localhost:8080/korisniks
     }
   }
 }
+```
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -226,7 +228,7 @@ Show All Tenders
 
 * **Success Response:**
 
-
+```json
 {
   "_embedded": {
     "ponudas": [
@@ -294,7 +296,7 @@ Show All Tenders
     }
   }
 }
-
+```
 * **Error Response:**
 -ubaciti pogrešan odgovor
 
@@ -318,7 +320,7 @@ Show All Katalogs
 
 
 * **Success Response:**
-
+```json
 {
   "_embedded": {
     "katalog": []
@@ -339,7 +341,7 @@ Show All Katalogs
     "number": 0
   }
 }
-
+```
 * **Error Response:**
 -ubaciti pogrešan odgovor
 
@@ -363,7 +365,7 @@ Update user
  <korisnik>
 
 * **Success Response:**
-
+```json
  {
   "firstName": "Sijah",
   "lastName": "Amir",
@@ -380,10 +382,11 @@ Update user
     }
   }
 }
- 
+```
 * **Error Response:**
 * **Sample Call:**
 curl -X PUT -H "Content-Type: application/json" -d "{""id"":1,""lastName"":""Amir"",""location"":""Travnik"",""email"":""asijah1@etf.unsa.ba"",""phone"":""062111222""}"  "http://localhost:8080/korisniks/1"
+```json
 {
   "firstName" : null,
   "lastName" : "Amir",
@@ -400,6 +403,7 @@ curl -X PUT -H "Content-Type: application/json" -d "{""id"":1,""lastName"":""Ami
     }
   }
 }
+```
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
 
@@ -423,7 +427,7 @@ Update katalog
  <katalog>
 
 * **Success Response:**
-
+```json
 {
   "nazivProizvoda" : "auto",
   "dodatneInformacije" : "dodatneInformacije-Dodano",
@@ -442,10 +446,11 @@ Update katalog
     }
   }
 }
- 
+```
 * **Error Response:**
 * **Sample Call:**
 curl -X PUT -H "Content-Type: application/json" -d "{""nazivProizvoda"":""auto"",""dodatneInformacije"":""dodatneInformacije-Dodano"",""cijena"":3501,""datumObjave"":null,""datumZavrsetka"":null,""podkategorijaId"":1,""korisnikId"":2,""zavrseno"": false}"  "http://localhost:8080/katalogs/1"
+```json
 {
   "nazivProizvoda" : "auto",
   "dodatneInformacije" : "dodatneInformacije-Dodano",
@@ -464,6 +469,7 @@ curl -X PUT -H "Content-Type: application/json" -d "{""nazivProizvoda"":""auto""
     }
   }
 }
+```
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
 
@@ -487,7 +493,7 @@ Update ponuda
  <katalog>
 
 * **Success Response:**
-
+```json
 {
   "idKatalog" : 1,
   "idKorisnik" : 1,
@@ -505,6 +511,7 @@ Update ponuda
 * **Error Response:**
 * **Sample Call:**
 curl -X PUT -H "Content-Type: application/json" -d "{""idKatalog"":1,""idKorisnik"":1,""ponuda"":115}"  "http://localhost:8080/ponudas/1"
+```json
 {
   "idKatalog" : 1,
   "idKorisnik" : 1,
@@ -518,5 +525,156 @@ curl -X PUT -H "Content-Type: application/json" -d "{""idKatalog"":1,""idKorisni
     }
   }
 }
+```
+* **Notes:**
+  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+-------------------------------------------------------------------------------------------------
+
+Get korisnik with given first name
+----
+  Get korisnik with given first name
+
+* **URL**
+
+  </korisnici/ime?firstName=Kim>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+ <firstName>
+* **Data Params**
+
+* **Error Response:**
+```json
+{
+    "status": "BAD_REQUEST",
+    "message": "Required String parameter 'firstName' is not present",
+    "errors": [
+        "firstName parameter is missing"
+    ]
+}
+```
+* **Success Response:**
+```json
+[
+    {
+        "id": 3,
+        "firstName": "Kim",
+        "lastName": "Bauer",
+        "location": "Visoko",
+        "email": "Iomanovic1@etf.unsa.ba",
+        "phone": "062/111-111"
+    }
+]
+
+```
+* **Notes:**
+  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+-------------------------------------------------------------------------------------------------
+
+Get korisnik with given second name
+----
+  Get korisnik with given second name
+
+* **URL**
+
+  </korisnici/prezime?lastName=Bauer>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+ <lastName>
+* **Data Params**
+
+* **Error Response:**
+```json
+{
+    "status": "BAD_REQUEST",
+    "message": "Required String parameter 'lastName' is not present",
+    "errors": [
+        "lastName parameter is missing"
+    ]
+}
+```
+
+* **Success Response:**
+```json
+[
+    {
+        "id": 1,
+        "firstName": "Jack",
+        "lastName": "Bauer",
+        "location": "Visoko",
+        "email": "Iomanovic1@etf.unsa.ba",
+        "phone": "062/111-111"
+    },
+    {
+        "id": 3,
+        "firstName": "Kim",
+        "lastName": "Bauer",
+        "location": "Visoko",
+        "email": "Iomanovic1@etf.unsa.ba",
+        "phone": "062/111-111"
+    }
+]
+
+```
+* **Notes:**
+  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+-------------------------------------------------------------------------------------------------
+
+Get korisnik with given second name
+----
+  Get korisnik with given second name
+
+* **URL**
+
+  </korisnici/prezime?lastName=Bauer>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+ <lastName>
+* **Data Params**
+
+* **Error Response:**
+```json
+{
+    "status": "BAD_REQUEST",
+    "message": "Required String parameter 'lastName' is not present",
+    "errors": [
+        "lastName parameter is missing"
+    ]
+}
+```
+
+* **Success Response:**
+```json
+[
+    {
+        "id": 1,
+        "firstName": "Jack",
+        "lastName": "Bauer",
+        "location": "Visoko",
+        "email": "Iomanovic1@etf.unsa.ba",
+        "phone": "062/111-111"
+    },
+    {
+        "id": 3,
+        "firstName": "Kim",
+        "lastName": "Bauer",
+        "location": "Visoko",
+        "email": "Iomanovic1@etf.unsa.ba",
+        "phone": "062/111-111"
+    }
+]
+
+```
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 

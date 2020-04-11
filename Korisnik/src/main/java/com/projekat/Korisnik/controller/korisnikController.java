@@ -13,32 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+@RequestMapping("/korisnici")
 @RestController
 public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	@RequestMapping(path = "/korisnici/ime", method = RequestMethod.GET)
+	@RequestMapping(value = "/ime", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<Korisnik> findByFirstName(@RequestParam String firstName) {  
 		return korisnikService.findByFirstName(firstName);
 	}
 	
-	@RequestMapping(path = "/korisnici/prezime", method = RequestMethod.GET)
-	public ArrayList<Korisnik> findByLastName(@PathVariable String lastName) {
+	@RequestMapping(value = "/prezime", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<Korisnik> findByLastName(@RequestParam String lastName) {
 		//Long temp = Long.parseLong(lastName); //provjeriti poslije
 		return korisnikService.findByLastName(lastName);
 	}
 	
-	@RequestMapping(path = "/korisnici/id", method = RequestMethod.GET)
-	public Korisnik findById(@PathVariable Long id) {
-		return korisnikService.findById(id);
-	}
 	
-	@PostMapping("")
+	@PostMapping("/korisnici")
     Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
 		return korisnikService.createKorisnik(korisnik);
