@@ -21,19 +21,19 @@ public class korisnikController {
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	@RequestMapping(path = "/korisnici", method = RequestMethod.GET)
+	@RequestMapping(path = "/korisnici/ime", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<Korisnik> findByFirstName(@RequestParam String firstName) {  
 		return korisnikService.findByFirstName(firstName);
 	}
 	
-	@RequestMapping(path = "/korisnici", method = RequestMethod.GET)
+	@RequestMapping(path = "/korisnici/prezime", method = RequestMethod.GET)
 	public ArrayList<Korisnik> findByLastName(@PathVariable String lastName) {
 		//Long temp = Long.parseLong(lastName); //provjeriti poslije
 		return korisnikService.findByLastName(lastName);
 	}
 	
-	@RequestMapping(path = "/korisnici", method = RequestMethod.GET)
+	@RequestMapping(path = "/korisnici/id", method = RequestMethod.GET)
 	public Korisnik findById(@PathVariable Long id) {
 		return korisnikService.findById(id);
 	}
