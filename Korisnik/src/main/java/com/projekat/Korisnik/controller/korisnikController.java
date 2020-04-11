@@ -2,38 +2,38 @@ package com.projekat.Korisnik.controller;
 
 import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.service.KorisnikService;
-
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("Korisnik/korisnici")
 @RestController
 public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	@GetMapping("/firstName")
-	public ArrayList<Korisnik> findByFirstName(@PathVariable String firstName) {  
+	@RequestMapping(path = "/korisnici", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<Korisnik> findByFirstName(@RequestParam String firstName) {  
 		return korisnikService.findByFirstName(firstName);
 	}
 	
-	@GetMapping("/lastName")
+	@RequestMapping(path = "/korisnici", method = RequestMethod.GET)
 	public ArrayList<Korisnik> findByLastName(@PathVariable String lastName) {
 		//Long temp = Long.parseLong(lastName); //provjeriti poslije
 		return korisnikService.findByLastName(lastName);
 	}
 	
-	@GetMapping("/id")
+	@RequestMapping(path = "/korisnici", method = RequestMethod.GET)
 	public Korisnik findById(@PathVariable Long id) {
 		return korisnikService.findById(id);
 	}
