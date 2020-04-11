@@ -9,4 +9,8 @@ public class KorisnikException extends RuntimeException{
 	public KorisnikException(String iliImeIliPrezime){
         super("Trazeni korisnik ne postoji");
     }
+	
+	public KorisnikException(String poruka, Integer pom) {
+		super("Nema niti jednog korisnika u bazi");
+	}
 }

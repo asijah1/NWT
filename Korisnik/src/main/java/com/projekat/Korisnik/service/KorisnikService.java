@@ -24,7 +24,7 @@ public class KorisnikService {
 	
 	public List<Korisnik> vratiKorisnike() throws KorisnikException {
         if (korisnikRepository.count() == 0) {
-            throw new KorisnikException("Nema korisnika u bazi");
+            throw new KorisnikException("Nema korisnika u bazi", 1);
         }
         List<Korisnik> bazaKorisnika = new ArrayList<>();
         korisnikRepository.findAll().forEach(bazaKorisnika::add);
@@ -66,12 +66,13 @@ public class KorisnikService {
 		return korisnikRepository.save(korisnik);
 	}
 	
-	public String deleteKorisnikWithId(Long korisnikId) throws KorisnikException{
+	public Korisnik deleteKorisnikWithId(Long korisnikId) throws KorisnikException{
 		if (!korisnikRepository.existsById(korisnikId)) {
             throw new KorisnikException("Traženi korisnik ne postoji");
         }
+		Korisnik temp = korisnikRepository.findById(korisnikId).orElseThrow();
         korisnikRepository.deleteById(korisnikId);
-        return "Korisnik je obrisan";
+        return temp;
     }
 	
 }

@@ -2,6 +2,9 @@ package com.projekat.Korisnik.controller;
 
 import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.service.KorisnikService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,19 @@ public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
+	
+	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	@ResponseBody
+	public Korisnik findById(@RequestParam String id) {
+		Long korisnikId = Long.parseLong(id);
+		return korisnikService.findById(korisnikId);
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Korisnik> vratiSveKorisnike() {  
+		return korisnikService.vratiKorisnike();
+	}
 	
 	@RequestMapping(value = "/ime", method = RequestMethod.GET)
 	@ResponseBody
@@ -46,7 +62,7 @@ public class korisnikController {
 		return korisnikService.updateKorisnik(korisnik);
 	}
 
-	@DeleteMapping
+	@RequestMapping(value = "/id", method = RequestMethod.DELETE)
     public void deleteKorisnik(@PathVariable String id) {
         Long korisnikId = Long.parseLong(id);
         korisnikService.deleteKorisnikWithId(korisnikId);

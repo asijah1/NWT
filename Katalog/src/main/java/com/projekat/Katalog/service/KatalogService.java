@@ -4,6 +4,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projekat.Katalog.exception.KatalogException;
 import com.projekat.Katalog.model.Katalog;
 import com.projekat.Katalog.repository.KatalogRepository;
 
@@ -13,8 +14,11 @@ public class KatalogService {
 	@Autowired
 	private KatalogRepository katalogRepository;
 
-	public Katalog findById(Long id) {
-		return katalogRepository.findById(id).orElseThrow();
+	public Katalog findById(Long katalogId) throws KatalogException {
+		if(!katalogRepository.existsById(katalogId)) {
+			throw new KatalogException();
+		}
+		return katalogRepository.findById(katalogId).orElseThrow();
 	}
 	
 	public Katalog createKatalog(String nazivProizvoda, String dodatneInformacije, int cijena, Date datumObjave, 
@@ -30,8 +34,12 @@ public class KatalogService {
 		return katalogRepository.save(katalog);
 	}
 	
-	public void deleteById(Long katalogId) {
+	public String deleteById(Long katalogId) throws KatalogException {
+		if(!katalogRepository.existsById(katalogId)) {
+			throw new KatalogException();
+		}
         katalogRepository.deleteById(katalogId);
+        return "Katalog obrisan";
     }
 	
 }
