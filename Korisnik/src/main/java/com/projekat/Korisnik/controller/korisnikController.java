@@ -46,10 +46,10 @@ public class korisnikController {
 		return korisnikService.updateKorisnik(korisnik);
 	}
 
-    @DeleteMapping("/id")
+	@DeleteMapping
     public void deleteKorisnik(@PathVariable String id) {
         Long korisnikId = Long.parseLong(id);
-        korisnikService.deleteById(korisnikId);
+        korisnikService.deleteKorisnikWithId(korisnikId);
     }
  
 }	

@@ -66,8 +66,12 @@ public class KorisnikService {
 		return korisnikRepository.save(korisnik);
 	}
 	
-	public void deleteById(Long korisnikId) {
+	public String deleteKorisnikWithId(Long korisnikId) throws KorisnikException{
+		if (!korisnikRepository.existsById(korisnikId)) {
+            throw new KorisnikException("Traženi korisnik ne postoji");
+        }
         korisnikRepository.deleteById(korisnikId);
+        return "Korisnik je obrisan";
     }
 	
 }
