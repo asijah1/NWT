@@ -3,11 +3,11 @@ package com.projekat.Katalog.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.projekat.Katalog.exception.KatalogException;
@@ -42,8 +42,21 @@ public class KatalogService {
 		return katalogRepository.save(new Katalog(katalog.getNazivProizvoda(), katalog.getDodatneInformacije(), katalog.getCijena(), katalog.getDatumObjave(), katalog.getDatumZavrsetka(), katalog.getPodkategorijaId(), katalog.getKorisnikId(), katalog.isZavrseno()));
 	}
 	
-	public Katalog updateKatalog(Katalog katalog) {
-		return katalogRepository.save(katalog);
+	public Katalog updateKatalog(Katalog noviKatalog, Long id) {
+		return katalogRepository.findById(id).map(katalog -> {
+	        katalog.setCijena(noviKatalog.getCijena());
+	        katalog.setDatumObjave(noviKatalog.getDatumObjave());
+	        katalog.setDatumZavrsetka(noviKatalog.getDatumZavrsetka());
+	        katalog.setDodatneInformacije(noviKatalog.getDodatneInformacije());
+	        katalog.setNazivProizvoda(noviKatalog.getNazivProizvoda());
+	        katalog.setKorisnikId(noviKatalog.getKorisnikId());
+	        katalog.setPodkategorijaId(noviKatalog.getPodkategorijaId());
+	        katalog.setZavrseno(noviKatalog.getZavrseno());
+	        return katalogRepository.save(katalog);
+	      })
+	      .orElseGet(() -> {
+	        return katalogRepository.save(noviKatalog);
+	      });
 	}
 	
 	public String deleteById(Long katalogId) throws Exception {

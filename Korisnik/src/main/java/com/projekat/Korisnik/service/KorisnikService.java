@@ -4,10 +4,8 @@ import com.projekat.Korisnik.exception.KorisnikException;
 import com.projekat.Korisnik.model.Korisnik;
 import com.projekat.Korisnik.service.KorisnikService;
 import com.projekat.Korisnik.repository.KorisnikRepository;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,10 +58,19 @@ public class KorisnikService {
 	}
 	 */
 	
-	public Korisnik updateKorisnik(Korisnik korisnik) {
-		//Long temp = Long.parseLong(id);
-		//korisnikRepository.findById(id).orElseThrow(); //ako ne pronadje korisnika sa datim id-em bacit će izuzetak
-		return korisnikRepository.save(korisnik);
+	public Korisnik updateKorisnik(Korisnik novioKrisnik, Long id) {
+		return korisnikRepository.findById(id).map(korisnik -> {
+			korisnik.setEmail(novioKrisnik.getEmail());
+			korisnik.setFirstName(novioKrisnik.getFirstName());
+			korisnik.setId(novioKrisnik.getId());
+			korisnik.setLastName(novioKrisnik.getLastName());
+			korisnik.setLocation(novioKrisnik.getLocation());
+			korisnik.setPhone(novioKrisnik.getPhone());
+			return korisnikRepository.save(korisnik);
+	      })
+	      .orElseGet(() -> {
+	        return korisnikRepository.save(novioKrisnik);
+	      });
 	}
 	
 	public Korisnik deleteKorisnikWithId(Long korisnikId) throws KorisnikException{

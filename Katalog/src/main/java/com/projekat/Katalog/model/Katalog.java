@@ -99,6 +99,10 @@ public boolean isZavrseno() {
 	return zavrseno;
 }
 
+public boolean getZavrseno() {
+	return this.zavrseno;
+}
+
 public void setZavrseno(boolean zavrseno) {
 	this.zavrseno = zavrseno;
 }

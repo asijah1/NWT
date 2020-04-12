@@ -197,8 +197,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 	     apiError.setMessage(ex.getMessage());
 	     return buildResponseEntity(apiError);
 	 }
-	 
-	 
 	   
 	   
 	   

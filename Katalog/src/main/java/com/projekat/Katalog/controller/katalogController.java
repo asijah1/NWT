@@ -21,8 +21,7 @@ public class katalogController {
 	
 	@Autowired
 	private KatalogService katalogService;
-	
-	
+
 	@GetMapping("/katalogSaId")
 	public Katalog findById(@RequestParam Long id) throws Exception {
 		return katalogService.findById(id);
@@ -40,20 +39,19 @@ public class katalogController {
 	*/
 	
 	@PostMapping("")
-    Katalog newKatalog(@RequestBody Katalog katalog, @PathVariable Long id) {
+    Katalog newKatalog(@RequestBody Katalog katalog) {
         //return katalogService.save(katalog);
 		return katalogService.addNewKatalog(katalog);
     }
 	
-	@PutMapping("/id")
-	Katalog replaceKatalog(@RequestBody Katalog katalog, @PathVariable Long id) {
-		return katalogService.updateKatalog(katalog);
+	@PutMapping("")
+	Katalog replaceKatalog(@RequestBody Katalog katalog, @RequestParam Long id) {
+		return katalogService.updateKatalog(katalog, id);
 	}
 	
-    @DeleteMapping("/id")
-    public void deleteKatalog(@PathVariable Long katalogSaId) throws Exception {
-        //Long katalogId = Long.parseLong(id);
-        katalogService.deleteById(katalogSaId);
+    @DeleteMapping("")
+    public void deleteKatalog(@RequestParam Long id) throws Exception {
+        katalogService.deleteById(id);
     }
  
 }	

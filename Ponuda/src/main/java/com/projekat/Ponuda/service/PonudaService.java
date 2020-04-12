@@ -1,5 +1,7 @@
 package com.projekat.Ponuda.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projekat.Ponuda.model.Ponuda;
@@ -10,11 +12,18 @@ public class PonudaService {
 	
 	@Autowired
 	private PonudaRepository ponudaRepository;
+	List<Ponuda> bazaPonuda;
 
 	public Ponuda findById(Long id) {
 		return ponudaRepository.findById(id).orElseThrow();
 	}
-
+	
+	public List<Ponuda> vratiPonude()  {
+        List<Ponuda> bazaPonuda = new ArrayList<>();
+        ponudaRepository.findAll().forEach(bazaPonuda::add);
+        return bazaPonuda;
+    }
+	
 	public Ponuda createPonuda(Long idKatalog, Long idKorisnik, Long ponuda){
         return ponudaRepository.save(new Ponuda(idKatalog, idKorisnik, ponuda));
     }
@@ -28,8 +37,16 @@ public class PonudaService {
 	}
 	 */
 	
-	public Ponuda updateKatalog(Ponuda ponuda) {
-		return ponudaRepository.save(ponuda);
+	public Ponuda updatePonuda(Ponuda novaPonuda, Long id) {
+		return ponudaRepository.findById(id).map(ponuda -> {
+			ponuda.setIdKatalog(novaPonuda.getidKatalog());
+			ponuda.setIdKorisnik(novaPonuda.getidKorisnik());
+			ponuda.setPonuda(novaPonuda.getPonuda());
+			return ponudaRepository.save(ponuda);
+	      })
+	      .orElseGet(() -> {
+	        return ponudaRepository.save(novaPonuda);
+	      });
 	}
 	
 	public void deleteById(Long ponudaId) {

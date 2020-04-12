@@ -65,13 +65,13 @@ public class korisnikController {
 		return korisnikService.createKorisnik(korisnik);
     }
 	
-	@PutMapping("/id")
-	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @PathVariable Long id) {
-		return korisnikService.updateKorisnik(korisnik);
+	@PutMapping("")
+	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @RequestParam Long id) {
+		return korisnikService.updateKorisnik(korisnik, id);
 	}
 	
-	@RequestMapping(value = "/id", method = RequestMethod.DELETE)
-    public void deleteKorisnik(@PathVariable String id) {
+	@RequestMapping(value = "", method = RequestMethod.DELETE)
+    public void deleteKorisnik(@RequestParam String id) {
         Long korisnikId = Long.parseLong(id);
         korisnikService.deleteKorisnikWithId(korisnikId);
     }

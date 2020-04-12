@@ -1,8 +1,9 @@
 package com.projekat.Ponuda.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.projekat.Ponuda.model.Ponuda;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("Ponuda/ponude")
+@RequestMapping("ponude")
 @RestController
 public class ponudaController {
 	
@@ -20,9 +21,14 @@ public class ponudaController {
 	private PonudaService ponudaService;
 
 	
-	@GetMapping("/id")
-	public Ponuda findById(@PathVariable Long id) {
+	@GetMapping("/katalogSaId")
+	public Ponuda findById(@RequestParam Long id) {
 		return ponudaService.findById(id);
+	}
+	
+	@GetMapping("")
+	public List<Ponuda> vratiPonude() {
+		return ponudaService.vratiPonude();
 	}
 	
 	@PostMapping("")
@@ -31,13 +37,13 @@ public class ponudaController {
 		return ponudaService.addNewPonuda(ponuda);
     }
 	
-	@PutMapping("/id")
-	Ponuda replaceKatalog(@RequestBody Ponuda ponuda, @PathVariable Long id) {
-		return ponudaService.updateKatalog(ponuda);
+	@PutMapping("")
+	Ponuda replaceKatalog(@RequestBody Ponuda ponuda, @RequestParam Long id) {
+		return ponudaService.updatePonuda(ponuda, id);
 	}
 
-    @DeleteMapping("/id")
-    public void deletePonuda(@PathVariable String id) {
+    @DeleteMapping("")
+    public void deletePonuda(@RequestParam String id) {
         Long ponudaId = Long.parseLong(id);
         ponudaService.deleteById(ponudaId);
     }
