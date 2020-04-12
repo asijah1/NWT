@@ -2,8 +2,14 @@ package com.projekat.Ponuda.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import com.projekat.Ponuda.Exception.PonudaException;
 import com.projekat.Ponuda.model.Ponuda;
 import com.projekat.Ponuda.repository.PonudaRepository;
 
@@ -14,12 +20,14 @@ public class PonudaService {
 	private PonudaRepository ponudaRepository;
 	List<Ponuda> bazaPonuda;
 
-	public Ponuda findById(Long id) {
-		return ponudaRepository.findById(id).orElseThrow();
+	public Ponuda findById(Long id) throws PonudaException{
+		return ponudaRepository.findById(id).orElseThrow(()->new PonudaException());
 	}
 	
-	public List<Ponuda> vratiPonude()  {
+	public List<Ponuda> vratiPonude()  throws PonudaException{
         List<Ponuda> bazaPonuda = new ArrayList<>();
+        if(ponudaRepository.count() == 0)
+        	throw new PonudaException("izuzetak");
         ponudaRepository.findAll().forEach(bazaPonuda::add);
         return bazaPonuda;
     }
@@ -31,11 +39,6 @@ public class PonudaService {
 	public Ponuda addNewPonuda(Ponuda ponuda) {
 		return ponudaRepository.save(new Ponuda(ponuda.getidKatalog(), ponuda.getidKorisnik(), ponuda.getPonuda()));
 	}
-	/*
-	public Ponuda save(Ponuda novi) {
-		return ponudaRepository.save(new Ponuda(1L, 2L, 3L));
-	}
-	 */
 	
 	public Ponuda updatePonuda(Ponuda novaPonuda, Long id) {
 		return ponudaRepository.findById(id).map(ponuda -> {
@@ -49,8 +52,11 @@ public class PonudaService {
 	      });
 	}
 	
-	public void deleteById(Long ponudaId) {
-        ponudaRepository.deleteById(ponudaId);
+	public void deleteById(Long id) throws PonudaException{
+		if (!ponudaRepository.existsById(id)) {
+            throw new PonudaException();
+        }
+        ponudaRepository.deleteById(id);
     }
 	
 }

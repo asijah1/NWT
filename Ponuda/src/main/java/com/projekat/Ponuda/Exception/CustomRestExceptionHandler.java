@@ -1,5 +1,6 @@
 package com.projekat.Ponuda.Exception;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,6 +175,12 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 	    ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "error occurred");
 	    return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
+	
+	@ExceptionHandler({PonudaException.class})
+    public ResponseEntity<Object> handleNoHandlerFoundException(Exception ex, WebRequest request) throws IOException {
+		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "error occurred");
+        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
 	
 	//
 }

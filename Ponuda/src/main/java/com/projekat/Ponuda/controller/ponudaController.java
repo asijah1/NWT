@@ -3,9 +3,13 @@ package com.projekat.Ponuda.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.projekat.Ponuda.Exception.PonudaException;
 import com.projekat.Ponuda.model.Ponuda;
 import com.projekat.Ponuda.service.PonudaService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +25,8 @@ public class ponudaController {
 	private PonudaService ponudaService;
 
 	
-	@GetMapping("/katalogSaId")
-	public Ponuda findById(@RequestParam Long id) {
+	@GetMapping("/ponudaSaId")
+	public Ponuda findById(@RequestParam Long id) throws PonudaException {
 		return ponudaService.findById(id);
 	}
 	
@@ -43,7 +47,7 @@ public class ponudaController {
 	}
 
     @DeleteMapping("")
-    public void deletePonuda(@RequestParam String id) {
+    public void deletePonuda(@RequestParam String id) throws PonudaException{
         Long ponudaId = Long.parseLong(id);
         ponudaService.deleteById(ponudaId);
     }
