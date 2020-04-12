@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.projekat.Katalog.exception.KatalogException;
@@ -23,9 +26,9 @@ public class KatalogService {
         return bazaKataloga;
     }
 	
-	public Katalog findById(Long katalogId) throws KatalogException {
+	public Katalog findById(Long katalogId) throws Exception {
 		if(!katalogRepository.existsById(katalogId)) {
-			throw new KatalogException();
+			throw new EntityNotFoundException("Trazeni katalog ne postoji");
 		}
 		return katalogRepository.findById(katalogId).orElseThrow();
 	}
@@ -43,9 +46,9 @@ public class KatalogService {
 		return katalogRepository.save(katalog);
 	}
 	
-	public String deleteById(Long katalogId) throws KatalogException {
+	public String deleteById(Long katalogId) throws Exception {
 		if(!katalogRepository.existsById(katalogId)) {
-			throw new KatalogException();
+			throw new EntityNotFoundException("Trazeni katalog ne postoji");
 		}
         katalogRepository.deleteById(katalogId);
         return "Katalog obrisan";

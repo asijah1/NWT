@@ -21,9 +21,10 @@ public class katalogController {
 	
 	@Autowired
 	private KatalogService katalogService;
-
+	
+	
 	@GetMapping("/katalogSaId")
-	public Katalog findById(@RequestParam Long id) {
+	public Katalog findById(@RequestParam Long id) throws Exception {
 		return katalogService.findById(id);
 	}
 	
@@ -50,9 +51,9 @@ public class katalogController {
 	}
 	
     @DeleteMapping("/id")
-    public void deleteKatalog(@PathVariable String id) {
-        Long katalogId = Long.parseLong(id);
-        katalogService.deleteById(katalogId);
+    public void deleteKatalog(@PathVariable Long katalogSaId) throws Exception {
+        //Long katalogId = Long.parseLong(id);
+        katalogService.deleteById(katalogSaId);
     }
  
 }	

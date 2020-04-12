@@ -193,10 +193,12 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
 
 	 @ExceptionHandler(EntityNotFoundException.class)
 	 protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex) {
-		 ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
+		 ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), ex);
 	     apiError.setMessage(ex.getMessage());
 	     return buildResponseEntity(apiError);
 	 }
+	 
+	 
 	   
 	   
 	   
