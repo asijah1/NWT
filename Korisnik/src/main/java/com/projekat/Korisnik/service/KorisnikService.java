@@ -62,7 +62,6 @@ public class KorisnikService {
 		return korisnikRepository.findById(id).map(korisnik -> {
 			korisnik.setEmail(novioKrisnik.getEmail());
 			korisnik.setFirstName(novioKrisnik.getFirstName());
-			korisnik.setId(novioKrisnik.getId());
 			korisnik.setLastName(novioKrisnik.getLastName());
 			korisnik.setLocation(novioKrisnik.getLocation());
 			korisnik.setPhone(novioKrisnik.getPhone());

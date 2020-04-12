@@ -25,7 +25,7 @@ public class ponudaController {
 	private PonudaService ponudaService;
 
 	
-	@GetMapping("/id")
+	@GetMapping("/ponudaSaId")
 	public Ponuda findById(@RequestParam Long id) throws PonudaException {
 		return ponudaService.findById(id);
 	}
@@ -42,8 +42,8 @@ public class ponudaController {
     }
 	
 	@PutMapping("")
-	Ponuda replaceKatalog(@RequestBody Ponuda ponuda) {
-		return ponudaService.updatePonuda(ponuda, ponuda.getId());
+	Ponuda replaceKatalog(@RequestBody Ponuda ponuda, @RequestParam Long id) {
+		return ponudaService.updatePonuda(ponuda, id);
 	}
 
     @DeleteMapping("")
