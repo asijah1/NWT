@@ -66,8 +66,8 @@ public class korisnikController {
     }
 	
 	@PutMapping("")
-	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @RequestParam Long id) {
-		return korisnikService.updateKorisnik(korisnik, id);
+	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik) {
+		return korisnikService.updateKorisnik(korisnik, korisnik.getId());
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
