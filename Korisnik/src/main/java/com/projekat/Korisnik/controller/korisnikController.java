@@ -71,9 +71,8 @@ public class korisnikController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
-    public void deleteKorisnik(@RequestParam String id) {
-        Long korisnikId = Long.parseLong(id);
-        korisnikService.deleteKorisnikWithId(korisnikId);
+    public void deleteKorisnik(@RequestBody Korisnik korisnik) {
+        korisnikService.deleteKorisnikWithId(korisnik.getId());
     }
  
 }	

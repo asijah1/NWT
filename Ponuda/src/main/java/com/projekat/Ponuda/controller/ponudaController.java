@@ -47,9 +47,8 @@ public class ponudaController {
 	}
 
     @DeleteMapping("")
-    public void deletePonuda(@RequestParam String id) throws PonudaException{
-        Long ponudaId = Long.parseLong(id);
-        ponudaService.deleteById(ponudaId);
+    public void deletePonuda(@RequestBody Ponuda ponuda) throws PonudaException{
+        ponudaService.deleteById(ponuda.getId());
     }
  
 }	

@@ -50,8 +50,8 @@ public class katalogController {
 	}
 	
     @DeleteMapping("")
-    public void deleteKatalog(@RequestParam Long id) throws Exception {
-        katalogService.deleteById(id);
+    public void deleteKatalog(@RequestBody Katalog katalog) throws Exception {
+        katalogService.deleteById(katalog.getId());
     }
  
 }	
