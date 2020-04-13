@@ -13,6 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.json.JSONObject;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -27,39 +30,42 @@ class KatalogApplicationTests {
 
 	@Test
 	public void shouldReturnKatalozi() throws Exception {
-		this.mockMvc.perform(get("/katalogs")).andDo(print()).andExpect(status().isOk())
-		.andExpect(jsonPath("$._embedded.katalogs").isNotEmpty());
+		this.mockMvc.perform(get("/katalozi")).andDo(print()).andExpect(status().isOk())
+		.andExpect(jsonPath("$").isNotEmpty())
+		.andExpect(jsonPath("$").isArray());
 	}
 	@Test
 	public void shouldReturn5thKatalog() throws Exception {
-		this.mockMvc.perform(get("/katalogs/5")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().contentType("application/hal+json;"))
-		.andExpect(jsonPath("$").isNotEmpty());
+		this.mockMvc.perform(get("/katalozi/katalogSaId?id=3")).andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().contentType("application/json;"))
+		.andExpect(jsonPath("$.id").value("3"));
 	}
 	@Test
 	public void givenKatalogPutOrReplaceIntoRepository() throws Exception {
 		ObjectMapper om = new ObjectMapper();
-	    this.mockMvc.perform(put("/katalogs/1")
+	    this.mockMvc.perform(put("/katalozi?id=2")
 	    .content(om.writeValueAsString(new Katalog("RX570", "Grafička kartica", 250, null,
 				null, 2L, 1L, true)))
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andDo(print()).andExpect(status().isCreated()) //201 znači da je uspješno kreirano
+	    .andDo(print()).andExpect(status().isOk()) //201 znači da je uspješno kreirano
 	    .andExpect(content().contentType("application/json;"))
 	    .andExpect(jsonPath("$.nazivProizvoda").value("RX570"))
 		.andExpect(jsonPath("$.dodatneInformacije").value("Grafička kartica"))
 		.andExpect(jsonPath("$.cijena").value(250))
-		.andExpect(jsonPath("$.zavrseno").value(true));
+		.andExpect(jsonPath("$.zavrseno").value(true))
+		.andExpect(jsonPath("$.id").value("2"));
 	}
 	@Test
 	public void givenKorisnikPutIntoRepository() throws Exception {
 		ObjectMapper om = new ObjectMapper();
-	    this.mockMvc.perform(post("/katalogs")
+	    this.mockMvc.perform(post("/katalozi")
 	    .content(om.writeValueAsString(new Katalog("RX580", "Grafička kartica", 350, null,
 				null, 2L, 1L, true)))
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andDo(print()).andExpect(status().isCreated()) //201 znači da je uspješno kreirano
+	    .andDo(print()).andExpect(status().isOk()) //201 znači da je uspješno kreirano
 	    .andExpect(content().contentType("application/json;"))
 	    .andExpect(jsonPath("$.nazivProizvoda").value("RX580"))
 		.andExpect(jsonPath("$.dodatneInformacije").value("Grafička kartica"))
@@ -68,10 +74,13 @@ class KatalogApplicationTests {
 	}
 	@Test
 	public void givenIdDeleteFromRepository() throws Exception {
-	    this.mockMvc.perform(delete("/katalogs/1")
+		JSONObject jo = new JSONObject();
+		jo.put("id", 1);
+	    this.mockMvc.perform(delete("/katalozi")
+	    .content(jo.toString())
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andExpect(status().isNoContent());  
+	    .andExpect(status().isOk());  
 	}
 
 	

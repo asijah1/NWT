@@ -13,6 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.json.JSONObject;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -26,36 +29,38 @@ class PonudaApplicationTests {
 
 	@Test
 	public void shouldReturnPonude() throws Exception {
-		this.mockMvc.perform(get("/ponudas")).andDo(print()).andExpect(status().isOk())
-		.andExpect(jsonPath("$._embedded.ponudas").isNotEmpty());
+		this.mockMvc.perform(get("/ponude")).andDo(print()).andExpect(status().isOk())
+		.andExpect(jsonPath("$").isNotEmpty())
+		.andExpect(jsonPath("$").isArray());
 	}
 	@Test
 	public void shouldReturn2ndPonuda() throws Exception {
-		this.mockMvc.perform(get("/ponudas/2")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().contentType("application/hal+json;"))
-		.andExpect(jsonPath("$").isNotEmpty());
+		this.mockMvc.perform(get("/ponude/ponudaSaId?id=2")).andDo(print()).andExpect(status().isOk())
+		.andExpect(content().contentType("application/json;"))
+		.andExpect(jsonPath("$.id").value("2"));
 	}
 	@Test
 	public void givenPonudaPutOrReplaceIntoRepository() throws Exception {
 		ObjectMapper om = new ObjectMapper();
-	    this.mockMvc.perform(put("/ponudas/1")
+	    this.mockMvc.perform(put("/ponude?id=3")
 	    .content(om.writeValueAsString(new Ponuda(1L, 1L, 250L)))
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andDo(print()).andExpect(status().isCreated()) //201 znači da je uspješno kreirano
+	    .andDo(print()).andExpect(status().isOk()) //201 znači da je uspješno kreirano
 	    .andExpect(content().contentType("application/json;"))
 	    .andExpect(jsonPath("$.idKatalog").value(1L))
 		.andExpect(jsonPath("$.idKorisnik").value(1L))
-		.andExpect(jsonPath("$.ponuda").value(250L));
+		.andExpect(jsonPath("$.ponuda").value(250L))
+		.andExpect(jsonPath("$.id").value("3"));
 	}
 	@Test
 	public void givenKatalogPutIntoRepository() throws Exception {
 		ObjectMapper om = new ObjectMapper();
-	    this.mockMvc.perform(post("/ponudas")
+	    this.mockMvc.perform(post("/ponude")
 	    .content(om.writeValueAsString(new Ponuda(2L, 2L, 2250L)))
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andDo(print()).andExpect(status().isCreated()) //201 znači da je uspješno kreirano
+	    .andDo(print()).andExpect(status().isOk()) //201 znači da je uspješno kreirano
 	    .andExpect(content().contentType("application/json;"))
 	    .andExpect(jsonPath("$.idKatalog").value(2L))
 		.andExpect(jsonPath("$.idKorisnik").value(2L))
@@ -63,10 +68,13 @@ class PonudaApplicationTests {
 	}
 	@Test
 	public void givenIdDeleteFromRepository() throws Exception {
-	    this.mockMvc.perform(delete("/ponudas/1")
+		JSONObject jo = new JSONObject();
+		jo.put("id", 1);
+	    this.mockMvc.perform(delete("/ponude")
+	    .content(jo.toString())
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andExpect(status().isNoContent());  
+	    .andExpect(status().isOk());  
 	}
 
 	

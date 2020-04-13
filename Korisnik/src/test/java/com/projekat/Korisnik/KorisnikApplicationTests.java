@@ -6,14 +6,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projekat.Korisnik.model.Korisnik;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.json.JSONObject;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -28,13 +27,21 @@ class KorisnikApplicationTests {
 
 	@Test
 	public void shouldReturnKorisnici() throws Exception {
-		this.mockMvc.perform(get("/korisnici")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/korisnici")).andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$").isArray())
+		.andExpect(jsonPath("$").isNotEmpty());
 	}
 	@Test
 	public void shouldReturn5thKorisnik() throws Exception {
-		this.mockMvc.perform(get("/korisnici/5")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().contentType("application/hal+json;"))
-		.andExpect(jsonPath("$").isNotEmpty());
+		this.mockMvc.perform(get("/korisnici/korisnikSaId?id=5")).andDo(print()).andExpect(status().isOk())
+		.andExpect(content().contentType("application/json;"))
+	    .andExpect(jsonPath("$.firstName").value("Michelle"))
+		.andExpect(jsonPath("$.lastName").value("Dessler"))
+		.andExpect(jsonPath("$.location").value("Visoko"))
+		.andExpect(jsonPath("$.email").value("Iomanovic1@etf.unsa.ba"))
+		.andExpect(jsonPath("$.phone").value("062/111-111"))
+		.andExpect(jsonPath("$.id").value("5"));
 	}
 	@Test
 	public void givenKorisnikPutIntoRepository() throws Exception {
@@ -43,7 +50,7 @@ class KorisnikApplicationTests {
 	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Travnik", "asijah1@etf.unsa.ba", "062/111-111")))
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andDo(print()).andExpect(status().is(201)) //201 znači da je uspješno kreirano
+	    .andDo(print()).andExpect(status().is(200)) //201 znači da je uspješno kreirano
 	    .andExpect(content().contentType("application/json;"))
 	    .andExpect(jsonPath("$.firstName").value("Amir"))
 		.andExpect(jsonPath("$.lastName").value("Sijah"))
@@ -54,7 +61,7 @@ class KorisnikApplicationTests {
 	@Test
 	public void givenKorisnikReplaceOrPutIntoRepository() throws Exception {
 		ObjectMapper om = new ObjectMapper();
-	    this.mockMvc.perform(put("/korisnici/1")
+	    this.mockMvc.perform(put("/korisnici?id=1")
 	    .content(om.writeValueAsString(new Korisnik("Ferhad", "Mesic", "Cazin", "fmesic1@etf.unsa.ba", "062/111-111")))
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
@@ -64,26 +71,30 @@ class KorisnikApplicationTests {
 		.andExpect(jsonPath("$.lastName").value("Mesic"))
 		.andExpect(jsonPath("$.location").value("Cazin"))
 		.andExpect(jsonPath("$.email").value("fmesic1@etf.unsa.ba"))
-		.andExpect(jsonPath("$.phone").value("062/111-111"));
+		.andExpect(jsonPath("$.phone").value("062/111-111"))
+		.andExpect(jsonPath("$.id").value("1"));
 	}
 	@Test
 	public void shouldReturnFirstNameKim() throws Exception {
-		this.mockMvc.perform(get("/korisnici/search/findByFirstName?firstName=Kim")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().contentType("application/hal+json;"))
-		.andExpect(jsonPath("$._embedded.korisnici.[0].firstName").value("Kim")); 
+		this.mockMvc.perform(get("/korisnici/ime?firstName=Kim")).andDo(print()).andExpect(status().isOk())
+		.andExpect(content().contentType("application/json;"))
+		.andExpect(jsonPath("$.firstName").value("Kim")); 
 	}
 	@Test
 	public void shouldReturnLastNameBauer() throws Exception {
-		this.mockMvc.perform(get("/korisnici/search/findByLastName?lastName=Bauer")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().contentType("application/hal+json;"))
-		.andExpect(jsonPath("$._embedded.korisnici.[0].lastName").value("Bauer")); 
+		this.mockMvc.perform(get("/korisnici/prezime?lastName=Bauer")).andDo(print()).andExpect(status().isOk())
+		.andExpect(content().contentType("application/json;"))
+		.andExpect(jsonPath("$.lastName").value("Bauer")); 
 	}
 	@Test
 	public void givenIdDeleteFromRepository() throws Exception {
-	    this.mockMvc.perform(delete("/korisnici/1")
+		JSONObject jo = new JSONObject();
+		jo.put("id", 1);
+	    this.mockMvc.perform(delete("/korisnici")
+	    .content(jo.toString())
 	    .contentType(MediaType.APPLICATION_JSON)
 	    .accept(MediaType.APPLICATION_JSON))
-	    .andExpect(status().isNoContent());  
+	    .andExpect(status().isOk());  
 	}
 	/*
 	@Test
