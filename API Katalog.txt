@@ -127,6 +127,7 @@ Prikaži kataloge sa id-om
     "zavrseno": true
 }
 ```
+
 * **Error Response:**
 * **Sample Call:**
 
@@ -135,6 +136,31 @@ curl http://localhost:8080/katalozi/katalogSaId?id=1
 
 * **Notes:**
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+-------------------------------------------------
+Dohvati katalog sa id-om			
+						
+* **URL**
+
+  </katalozi/katalogSaId?id=9>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+  <id>
+* **Data Params**
+
+* **Error Response:**
+
+{
+    "timestamp": "13-04-2020 01:13:58",
+    "status": "NOT_FOUND",
+    "message": "Trazeni katalog ne postoji",
+    "errors": null,
+    "debugMessage": "Trazeni katalog ne postoji"
+}
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Izmjeni katalog sa id-om

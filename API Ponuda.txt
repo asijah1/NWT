@@ -102,6 +102,32 @@ curl http://localhost:8082/ponude/ponudaSaId?id=1
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Dohvati ponudu sa id-om			
+						
+* **URL**
+
+  </ponude/ponudaSaId?id=122>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+  <id>
+* **Data Params**
+
+* **Error Response:**
+
+{
+    "status": "NOT_FOUND",
+    "message": "Tražena ponuda ne postoji",
+    "errors": [
+        "error occurred"
+    ]
+}
+
+------------------------------------------------------------------------------------------------
+
 Izmjeni ponudu sa id-om
 ----
   Dohvati ponudu sa id-om ili je kreiraj

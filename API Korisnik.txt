@@ -108,6 +108,31 @@ curl http://localhost:8081/korisnici/korisnikSaId?id=1
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Dohvati korisnika sa id-om			
+						
+* **URL**
+
+  </korisnik/korisnikSaId?id=0>
+
+* **Method:**
+
+  `GET` 
+
+*  **URL Params**
+  <id>
+* **Data Params**
+
+* **Error Response:**
+
+{
+    "status": "NOT_FOUND",
+    "message": "Trazeni korisnik ne postoji",
+    "errors": [
+        "error occurred"
+    ]
+}
+
+--------------------------------------------------------
 Prikaži korisnika/e sa imenom
 ----
   Dohvati korisnika/e sa imenom
