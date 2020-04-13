@@ -5,6 +5,8 @@ import com.projekat.Korisnik.service.KorisnikService;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,18 +62,18 @@ public class korisnikController {
 	}
 	
 	@PostMapping("")
-    Korisnik newKorisnik(@RequestBody Korisnik korisnik) {
+    Korisnik newKorisnik(@Valid @RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
 		return korisnikService.createKorisnik(korisnik);
     }
 	
 	@PutMapping("")
-	Korisnik replaceKorisnik(@RequestBody Korisnik korisnik, @RequestParam Long id) {
+	Korisnik replaceKorisnik(@Valid @RequestBody Korisnik korisnik, @RequestParam Long id) {
 		return korisnikService.updateKorisnik(korisnik, id);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
-    public void deleteKorisnik(@RequestBody Korisnik korisnik) {
+    public void deleteKorisnik(@Valid @RequestBody Korisnik korisnik) {
         korisnikService.deleteKorisnikWithId(korisnik.getId());
     }
  

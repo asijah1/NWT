@@ -72,6 +72,51 @@ class KatalogApplicationTests {
 		.andExpect(jsonPath("$.cijena").value(350))
 		.andExpect(jsonPath("$.zavrseno").value(true));
 	}
+	
+	@Test
+	public void nazivNotNull() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/katalozi")
+	    .content(om.writeValueAsString(new Katalog(null, "Grafička kartica", 350, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void nazivTooShort() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/katalozi")
+	    .content(om.writeValueAsString(new Katalog("aa", "Grafička kartica", 350, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void nazivTooLong() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/katalozi")
+	    .content(om.writeValueAsString(new Katalog("1234512345123451234512345123451234512345123451234521321", "Grafička kartica", 350, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void cijenaNotNegative() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/katalozi")
+	    .content(om.writeValueAsString(new Katalog("570rx", "Grafička kartica", -1, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
+	
 	@Test
 	public void givenIdDeleteFromRepository() throws Exception {
 		JSONObject jo = new JSONObject();
@@ -83,7 +128,49 @@ class KatalogApplicationTests {
 	    .andExpect(status().isOk());  
 	}
 
+	@Test
+	public void nazivNotNullPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/katalozi?id=1")
+	    .content(om.writeValueAsString(new Katalog(null, "Grafička kartica", 350, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
 	
+	@Test
+	public void nazivTooShortPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/katalozi?id=1")
+	    .content(om.writeValueAsString(new Katalog("aa", "Grafička kartica", 350, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void nazivTooLongPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/katalozi?id=1")
+	    .content(om.writeValueAsString(new Katalog("1234512345123451234512345123451234512345123451234521321", "Grafička kartica", 350, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void cijenaNotNegativePut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/katalozi?id=1")
+	    .content(om.writeValueAsString(new Katalog("570rx", "Grafička kartica", -1, null,
+				null, 2L, 1L, true)))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().isBadRequest());
+	}
 	/*
 	@Test
 	public void shouldDeleteFirstWhichIsBauer() throws Exception {

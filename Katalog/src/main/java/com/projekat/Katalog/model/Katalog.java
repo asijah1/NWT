@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "katalog")
@@ -20,6 +21,7 @@ public class Katalog {
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
   @NotNull(message = "Unesite naziv proizvoda")
+  @Size(min = 3, max = 50, message = "Naziv characters length has to be inbetween (3,50)")
   private String nazivProizvoda;
   //dodatne informacije nisu obavezne
   private String dodatneInformacije;

@@ -2,6 +2,8 @@ package com.projekat.Katalog.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,13 +41,13 @@ public class katalogController {
 	*/
 	
 	@PostMapping("")
-    Katalog newKatalog(@RequestBody Katalog katalog) {
+    Katalog newKatalog(@Valid @RequestBody Katalog katalog) {
         //return katalogService.save(katalog);
 		return katalogService.addNewKatalog(katalog);
     }
 	
 	@PutMapping("")
-	Katalog replaceKatalog(@RequestBody Katalog katalog, @RequestParam Long id) {
+	Katalog replaceKatalog(@Valid @RequestBody Katalog katalog, @RequestParam Long id) {
 		return katalogService.updateKatalog(katalog, id);
 	}
 	

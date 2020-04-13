@@ -58,6 +58,62 @@ class KorisnikApplicationTests {
 		.andExpect(jsonPath("$.email").value("asijah1@etf.unsa.ba"))
 		.andExpect(jsonPath("$.phone").value("062/111-111"));
 	}
+	
+	@Test
+	public void locationTooShort() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/korisnici")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1@etf.unsa.ba", "062/111-111")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void locationTooLong() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/korisnici")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "123451234512345123451234512345123451234512345123451234512345", "asijah1@etf.unsa.ba", "062/111-111")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void phoneTooShort() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/korisnici")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1@etf.unsa.ba", "062/")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void phoneTooLong() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/korisnici")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1@etf.unsa.ba", "062/3423423423423")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void emailWrong() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(post("/korisnici")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1", "062/3423423423423")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
 	@Test
 	public void givenKorisnikReplaceOrPutIntoRepository() throws Exception {
 		ObjectMapper om = new ObjectMapper();
@@ -96,14 +152,61 @@ class KorisnikApplicationTests {
 	    .accept(MediaType.APPLICATION_JSON))
 	    .andExpect(status().isOk());  
 	}
-	/*
+
 	@Test
-	public void shouldDeleteFirstWhichIsBauer() throws Exception {
-		this.mockMvc.perform(delete("/korisnici/1")).andDo(print()).andExpect(status().isOk())
-		.andExpect(content().contentType("application/hal+json;"))
-		.andExpect(jsonPath("$._embedded.korisnici.[0].lastName").value("Bauer")); 
+	public void locationTooShortPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/korisnici?id=1")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1@etf.unsa.ba", "062/111-111")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
 	}
-	*/
+	
+	@Test
+	public void locationTooLongPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/korisnici?id=1")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "123451234512345123451234512345123451234512345123451234512345", "asijah1@etf.unsa.ba", "062/111-111")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void phoneTooShortPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/korisnici?id=1")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1@etf.unsa.ba", "062/")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void phoneTooLongPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/korisnici?id=1")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1@etf.unsa.ba", "062/3423423423423")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
+	
+	@Test
+	public void emailWrongPut() throws Exception {
+		ObjectMapper om = new ObjectMapper();
+	    this.mockMvc.perform(put("/korisnici?id=1")
+	    .content(om.writeValueAsString(new Korisnik("Amir", "Sijah", "Tr", "asijah1", "062/3423423423423")))
+	    .contentType(MediaType.APPLICATION_JSON)
+	    .accept(MediaType.APPLICATION_JSON))
+	    .andDo(print()).andExpect(status().is(400)) //201 znači da je uspješno kreirano
+	    .andExpect(content().contentType("application/json;"));
+	}
 }
 
 //public class GreetControllerIntegrationTest {
