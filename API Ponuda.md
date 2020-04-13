@@ -119,6 +119,7 @@ Izmjeni ponudu sa id-om
 * **Data Params**
   
   <Katalog>
+
 ```json
 {
     "id": 1,
