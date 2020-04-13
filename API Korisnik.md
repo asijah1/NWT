@@ -226,6 +226,7 @@ Izmjeni korisnika sa id-om
 * **Data Params**
   
   <Katalog>
+
 ```json
 {
     "firstName": "Amir",

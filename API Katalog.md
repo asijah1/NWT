@@ -180,6 +180,7 @@ Izmjeni katalog sa id-om
 * **Data Params**
   
   <Katalog>
+
 ```json
 {
     "nazivProizvoda": "bijela tehnika",
