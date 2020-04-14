@@ -1,6 +1,6 @@
 # NAPREDNE WEB TEHNOLOGIJE
 
-## Uputstva za pokretanje projekata
+## Uputstvo za pokretanje projekata
 ### Potrebni preduslovi:
 -Lokalno instalirana java (1.8);
 -Baza H2 Database Engine.
