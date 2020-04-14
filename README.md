@@ -1,5 +1,3 @@
-# NAPREDNE WEB TEHNOLOGIJE
-
 ## Uputstvo za pokretanje projekata
 
 ### Potrebni preduslovi:
