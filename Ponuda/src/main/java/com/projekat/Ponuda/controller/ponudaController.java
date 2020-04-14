@@ -30,6 +30,11 @@ public class ponudaController {
 		return ponudaService.findById(id);
 	}
 	
+	@GetMapping("/katalogSaId")
+	public List<Ponuda> findKatalogById(@RequestParam Long id) throws PonudaException {
+		return ponudaService.findByKatalogId(id);
+	}
+	
 	@GetMapping("")
 	public List<Ponuda> vratiPonude() {
 		return ponudaService.vratiPonude();

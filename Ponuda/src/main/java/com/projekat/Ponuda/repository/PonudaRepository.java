@@ -11,6 +11,6 @@ import com.projekat.Ponuda.model.Ponuda;
 public interface PonudaRepository extends CrudRepository<Ponuda, Long> {
 
   List<Ponuda> findByPonuda(Long ponuda); //ođe možda greška, provjerit
-
+  List<Ponuda> findByIdKatalog(Long idKatalog);
   Ponuda findById(long id);
 }

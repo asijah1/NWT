@@ -1,6 +1,7 @@
 package com.projekat.Katalog.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,8 @@ public class Katalog {
   //
   private Long podkategorijaId;
   //
+  
+  
   private Long korisnikId;
   //malo kompleksniji provjera, zavisi da li je aukcija završila ili ne
   private boolean zavrseno;
@@ -141,5 +144,7 @@ public Long getId() {
 				+ ", podkategorijaId=" + podkategorijaId + ", korisnikId=" + korisnikId + ", zavrseno=" + zavrseno
 				+ "]";
 	}
+
+
 
 }

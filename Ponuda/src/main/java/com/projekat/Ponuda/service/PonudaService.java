@@ -23,6 +23,9 @@ public class PonudaService {
 	public Ponuda findById(Long id) throws PonudaException{
 		return ponudaRepository.findById(id).orElseThrow(()->new PonudaException());
 	}
+	public List<Ponuda> findByKatalogId(Long id) throws PonudaException{
+		return ponudaRepository.findByIdKatalog(id);
+	}
 	
 	public List<Ponuda> vratiPonude()  throws PonudaException{
         List<Ponuda> bazaPonuda = new ArrayList<>();
