@@ -33,6 +33,9 @@ public class katalogController {
 	@Autowired
 	private KatalogService katalogService;
 
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@GetMapping("/katalogSaId")
 	public Katalog findById(@RequestParam Long id) throws Exception {
 		return katalogService.findById(id);
@@ -40,19 +43,17 @@ public class katalogController {
 	
 	@GetMapping("/dohvatiPonude") // sve ponude vezane za neki katalog
 	public List<Ponuda> findByIdPonude(@RequestParam Long id) throws Exception {
-		RestTemplate rt = new RestTemplate();
-		ResponseEntity<Ponuda[]> response = rt.getForEntity("http://localhost:8082/ponude/katalogSaId?id=" + id, Ponuda[].class);
+		ResponseEntity<Ponuda[]> response = restTemplate.getForEntity("http://ponuda/ponude/katalogSaId?id=" + id, Ponuda[].class);
 		Ponuda[] ponude = response.getBody();
 		return Arrays.asList(ponude);
 	}
 	
 	@GetMapping("/dohvatiKorisnike") //svi korisnici koji imaju aktivne ponude na katalogu
 	public List<Korisnik> findByIdKataloge(@RequestParam Long id) throws Exception {
-		RestTemplate rt = new RestTemplate();
-		ResponseEntity<Ponuda[]> response = rt.getForEntity("http://localhost:8082/ponude/katalogSaId?id=" + id, Ponuda[].class);
+		ResponseEntity<Ponuda[]> response = restTemplate.getForEntity("http://ponuda/ponude/katalogSaId?id=" + id, Ponuda[].class);
 		Ponuda[] ponude = response.getBody();
 		return Arrays.asList(ponude).stream().map(ponuda ->{
-			Korisnik k = rt.getForObject("http://localhost:8081/korisnici/korisnikSaId?id=" + ponuda.getId(), Korisnik.class);
+			Korisnik k = restTemplate.getForObject("http://korisnik/korisnici/korisnikSaId?id=" + ponuda.getId(), Korisnik.class);
 			return k;
 		}).collect(Collectors.toList());
 	}
