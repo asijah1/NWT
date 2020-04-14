@@ -1,3 +1,9 @@
+## Članovi tima
+
+* Ferhad Mešić
+* Irhad Omanović
+* Amir Sijah
+
 ## Uputstvo za pokretanje projekata
 
 ### Potrebni preduslovi:
