@@ -1,8 +1,14 @@
 package com.example.systemevents;
 
-public class SystemEventsImpl /*extends SystemEventsImplBase*/ {
+import com.example.systemevents.SystemEventsGrpc.SystemEventsImplBase;
+import com.example.systemevents.SystemEventsOuterClass.Request;
+import com.example.systemevents.SystemEventsOuterClass.Response;
 
-	/*
+import io.grpc.stub.StreamObserver;
+
+public class SystemEventsImpl extends SystemEventsImplBase {
+
+	
 	@Override
 	public void start(Request request, StreamObserver<Response> responseObserver) {
  
@@ -21,6 +27,6 @@ public class SystemEventsImpl /*extends SystemEventsImplBase*/ {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
-	 */
+	 
 	
 }
