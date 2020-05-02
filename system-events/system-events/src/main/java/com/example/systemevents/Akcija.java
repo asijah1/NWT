@@ -83,5 +83,4 @@ public class Akcija {
 		this.odgovor = odgovor;
 	}
 	
-	
 }

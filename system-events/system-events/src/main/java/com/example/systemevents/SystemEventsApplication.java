@@ -17,6 +17,7 @@ public class SystemEventsApplication {
           .addService(new SystemEventsImpl()).build();
 		
         server.start();
+        System.out.println("Pokrenut gRPC server na portu 8083.\n");
         server.awaitTermination();
     }
 }
