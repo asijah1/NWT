@@ -5,36 +5,39 @@ option java_package = "com.example.systemevents";
 
 service SystemEvents {
     rpc start(Request) returns (Response) {};
-    rpc GetPonude(Katalog) returns (stream Ponuda) {};
+}
+
+service Katalog {
+	rpc GetPonude(Katalog) returns (stream Ponuda) {};
     rpc GetKorisnici(Katalog) returns (stream Korisnik) {};
 }
 
 message Korisnik {
-	Long id = 1;
-    String firstName = 2;
-    String lastName = 3;
-    String location = 4;
-    String email = 5;
-    String phone = 6;
+	int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string location = 4;
+    string email = 5;
+    string phone = 6;
 }
 
 message Ponuda {
-	Long id = 1;
-  	Long idKatalog = 2;
-  	Long idKorisnik = 3;
- 	Long ponuda = 4;
+	int32 id = 1;
+  	int32 idKatalog = 2;
+  	int32 idKorisnik = 3;
+ 	int32 ponuda = 4;
 }
 
 message Katalog {
-	Long id = 1;
-    String nazivProizvoda = 2;
-    String dodatneInformacije = 3;
-    int cijena = 4;
-    Date datumObjave = 5; 
-    Date datumZavrsetka = 6; 
-    Long podkategorijaId = 7;
-  	Long korisnikId = 8;
-  	boolean zavrseno = 9;
+	int32 id = 1;
+    string nazivProizvoda = 2;
+    string dodatneInformacije = 3;
+    int32 cijena = 4;
+    google.protobuf.Timestamp datumObjave = 5; 
+    google.protobuf.Timestamp datumZavrsetka = 6; 
+    int32 podkategorijaId = 7;
+  	int32 korisnikId = 8;
+  	bool zavrseno = 9;
 }
 
 message Request {
