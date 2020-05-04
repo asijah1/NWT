@@ -9,7 +9,6 @@ import io.grpc.stub.StreamObserver;
 
 public class SystemEventsImpl extends SystemEventsImplBase {
 
-	
 	@Override
 	public void start(Request request, StreamObserver<Response> responseObserver) {
  
