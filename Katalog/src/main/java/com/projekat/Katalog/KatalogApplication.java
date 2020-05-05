@@ -21,10 +21,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-import com.example.Katalog.SystemEventsGrpc;
-import com.example.Katalog.SystemEventsOuterClass;
-import com.example.Katalog.SystemEventsOuterClass.Request;
-import com.example.Katalog.SystemEventsOuterClass.Response;
+
 import com.google.protobuf.Timestamp;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;

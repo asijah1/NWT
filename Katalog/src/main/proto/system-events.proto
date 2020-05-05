@@ -1,8 +1,9 @@
+/*
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 //option java_multiple_files = true;
 //Irhade trebalo bi da vidiš i .proto
-option java_package = "com.example.Katalog";
+option java_package = "com.projekat.Katalog";
 
 service SystemEvents {
     rpc start(Request) returns (Response) {};
@@ -29,3 +30,4 @@ message Response {
     string odgovorNaAkciju = 1;
     tipOdgovoraNaAkciju tip = 2;
 }
+*/

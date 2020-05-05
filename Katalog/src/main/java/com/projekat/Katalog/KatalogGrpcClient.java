@@ -1,9 +1,8 @@
 package com.projekat.Katalog;
 
 import org.springframework.context.annotation.Configuration;
-
-import com.example.Katalog.SystemEventsGrpc;
-import com.example.Katalog.SystemEventsOuterClass;
+//import com.projekat.Katalog.SystemEventsGrpc;
+//import com.projekat.Katalog.SystemEventsOuterClass;
 import com.google.protobuf.Timestamp;
 
 import io.grpc.ManagedChannel;
