@@ -83,4 +83,14 @@ public class Akcija {
 		this.odgovor = odgovor;
 	}
 	
+	@Override
+	public String toString() {
+		return "Akcija(" + 
+				", timestamp" + timestampAkcije.toString() +
+				", tipAkcije" + akcija +
+				", nazivMikroserivsa" + mikroservis +
+				", nazivResursa" + resurs + 
+				")";
+	}
+	
 }

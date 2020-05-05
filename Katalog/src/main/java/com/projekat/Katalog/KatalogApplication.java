@@ -21,10 +21,20 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+import com.example.Katalog.SystemEventsGrpc;
+import com.example.Katalog.SystemEventsOuterClass;
+import com.example.Katalog.SystemEventsOuterClass.Request;
+import com.example.Katalog.SystemEventsOuterClass.Response;
+import com.google.protobuf.Timestamp;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 import com.netflix.ribbon.RequestTemplate;
 import com.projekat.Katalog.KatalogApplication;
 import com.projekat.Katalog.model.Katalog;
 import com.projekat.Katalog.repository.KatalogRepository;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -35,6 +45,22 @@ public class KatalogApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(KatalogApplication.class, args);
+		
+		/*
+		//dio ispod se odnosi na grpc server
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8083)
+		          .usePlaintext()
+		          .build();
+		 
+		        SystemEventsGrpc.SystemEventsBlockingStub stub = SystemEventsGrpc.newBlockingStub(channel);
+		 
+		        Response response = stub.start(Request.newBuilder()
+		          .setNazivMikroservisa("Katalog")
+		          .setNazivResursa("resurs")
+		          .build());
+		 
+		        channel.shutdown();
+		*/
 	}
 	
 	@RestController
