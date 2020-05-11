@@ -1,5 +1,6 @@
 package com.projekat.Ponuda;
 
+import java.sql.Time;
 import java.time.Instant;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ public class Presretac extends HandlerInterceptorAdapter{
     private String mikroservis;
 	
 	@Autowired
-    private PonudaGrpcClient katalogGrpcClient;
+    private PonudaGrpcClient ponudaGrpcClient;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -48,18 +49,19 @@ public class Presretac extends HandlerInterceptorAdapter{
         SystemEventsOuterClass.Request.tipAkcije tipAkcije = getTipAkcije(request.getMethod());
         String resurs = request.getRequestURI();
         Instant time = Instant.now();
+        //popraviti vrijeme
         Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
         Integer statusniKod = response.getStatus();
-        katalogGrpcClient.pozovi(timestamp, mikroservis, tipAkcije, resurs, statusniKod);
+        ponudaGrpcClient.pozovi(timestamp, mikroservis, tipAkcije, resurs, statusniKod);
     
     }
 
     private SystemEventsOuterClass.Request.tipAkcije getTipAkcije(String requestMethod) {
             if(requestMethod.equals("GET"))
                 return SystemEventsOuterClass.Request.tipAkcije.GET;
-            else if(requestMethod.equals("UPDATE"))
+            else if(requestMethod.equals("PUT"))
                 return SystemEventsOuterClass.Request.tipAkcije.UPDATE;
-            else if(requestMethod.equals("CREATE"))
+            else if(requestMethod.equals("POST"))
                 return SystemEventsOuterClass.Request.tipAkcije.CREATE;
             else if(requestMethod.equals("DELETE"))
                 return SystemEventsOuterClass.Request.tipAkcije.DELETE;

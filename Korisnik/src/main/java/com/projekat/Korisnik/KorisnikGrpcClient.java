@@ -1,16 +1,13 @@
-package com.projekat.Ponuda;
+package com.projekat.Korisnik;
 
 import org.springframework.context.annotation.Configuration;
-//import com.projekat.Katalog.SystemEventsGrpc;
-//import com.projekat.Katalog.SystemEventsOuterClass;
 import com.google.protobuf.Timestamp;
-
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 @Configuration
-public class PonudaGrpcClient {
-
+public class KorisnikGrpcClient {
+	
 	public void pozovi(Timestamp timestamp, String nazivMikroservisa, SystemEventsOuterClass.Request.tipAkcije tip, String nazivResursa, Integer statusniKod) {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8086).usePlaintext().build();
 		

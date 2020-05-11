@@ -23,9 +23,9 @@ public class SystemEventsApplication {
 	//grpc server
 	public static void main(String[] args) throws IOException, InterruptedException{
 		SpringApplication.run(SystemEventsApplication.class, args); //*;
-        Server server = ServerBuilder.forPort(8083).addService(new SystemEventsImpl()).build();
+        Server server = ServerBuilder.forPort(8086).addService(new SystemEventsImpl()).build();
         server.start();
-        System.out.println("Pokrenut gRPC server na portu 8083.\n");
+        System.out.println("Pokrenut gRPC server na portu 8086.\n");
         server.awaitTermination();
     }
 }

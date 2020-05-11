@@ -1,4 +1,4 @@
-package com.projekat.Katalog;
+package com.projekat.Korisnik;
 
 import java.time.Instant;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ public class Presretac extends HandlerInterceptorAdapter{
     private String mikroservis;
 	
 	@Autowired
-    private KatalogGrpcClient katalogGrpcClient;
+    private KorisnikGrpcClient korisnikGrpcClient;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -50,7 +50,7 @@ public class Presretac extends HandlerInterceptorAdapter{
         Instant time = Instant.now();
         Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
         Integer statusniKod = response.getStatus();
-        katalogGrpcClient.pozovi(timestamp, mikroservis, tipAkcije, resurs, statusniKod);
+        korisnikGrpcClient.pozovi(timestamp, mikroservis, tipAkcije, resurs, statusniKod);
     
     }
 
