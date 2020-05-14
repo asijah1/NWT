@@ -29,11 +29,11 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	    AuthenticationManagerBuilder auth) throws Exception {
 	  auth.inMemoryAuthentication()
 	    .withUser("john.carnell")
-	    .password("password1")
+	    .password("{noop}password1")
 	    .roles("USER")
 	    .and()
 	    .withUser("william.woodward")
-	    .password("password2")
+	    .password("{noop}password2")
 	    .roles("USER", "ADMIN");
 	}
 }
