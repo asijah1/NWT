@@ -1,96 +1,83 @@
 package com.example.systemevents;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.example.systemevents.SystemEventsOuterClass.Request.tipAkcije;
+import com.google.protobuf.Timestamp;
+
+@Entity
+@Table(name = "akcija")
 public class Akcija {
 	
-	enum TipOdgovora {
-		USPJESNA,
-		GRESKA
-	}
-	
-	enum TipAkcije {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
+    private String timestamp;
+    private String nazivMikroservisa;
+    enum TipAkcije {
 		GET,
 		UPDATE,
 		CREATE,
 		DELETE
 	};
-	
-	private Date timestampAkcije;
-	private String mikroservis;
-	private String korisnik;
-	private TipAkcije akcija;
-	private String resurs;
-	private TipOdgovora odgovor;
-	
-	
-	public Akcija(Date timestampAkcije, String mikroservis, String korisnik, TipAkcije akcija, String resurs,
-			TipOdgovora odgovor) {
-		super();
-		this.timestampAkcije = timestampAkcije;
-		this.mikroservis = mikroservis;
-		this.korisnik = korisnik;
-		this.akcija = akcija;
-		this.resurs = resurs;
-		this.odgovor = odgovor;
+    private tipAkcije tipAkcije;
+    private String nazivResursa;
+    
+    protected Akcija() {}
+    
+    public Akcija(Timestamp timestamp, String nazivMikroservisa, tipAkcije tipAkcije, String nazivResursa) {
+    	
+    	this.setTimestamp(timestamp.toString());
+    	this.setNazivMikroservisa(nazivMikroservisa);
+    	this.setTipAkcije(tipAkcije);
+    	this.setNazivResursa(nazivResursa);
+    	
+    }
+    
+	public Integer getId() {
+		return id;
 	}
-	
-	
-	public Date getTimestampAkcije() {
-		return timestampAkcije;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public void setTimestampAkcije(Date timestampAkcije) {
-		this.timestampAkcije = timestampAkcije;
+	public String getTimestamp() {
+		return timestamp;
 	}
-	
-	
-	public String getMikroservis() {
-		return mikroservis;
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
-	public void setMikroservis(String mikroservis) {
-		this.mikroservis = mikroservis;
+	public tipAkcije getTipAkcije() {
+		return tipAkcije;
 	}
-	
-	
-	public String getKorisnik() {
-		return korisnik;
+	public void setTipAkcije(tipAkcije tipAkcije) {
+		this.tipAkcije = tipAkcije;
 	}
-	public void setKorisnik(String korisnik) {
-		this.korisnik = korisnik;
+	public String getNazivMikroservisa() {
+		return nazivMikroservisa;
 	}
-	
-	
-	public TipAkcije getAkcija() {
-		return akcija;
+	public void setNazivMikroservisa(String nazivMikroservisa) {
+		this.nazivMikroservisa = nazivMikroservisa;
 	}
-	public void setAkcija(TipAkcije akcija) {
-		this.akcija = akcija;
+	public String getNazivResursa() {
+		return nazivResursa;
 	}
-	
-	
-	public String getResurs() {
-		return resurs;
-	}
-	public void setResurs(String resurs) {
-		this.resurs = resurs;
-	}
-	
-	
-	public TipOdgovora getOdgovor() {
-		return odgovor;
-	}
-	public void setOdgovor(TipOdgovora odgovor) {
-		this.odgovor = odgovor;
+	public void setNazivResursa(String nazivResursa) {
+		this.nazivResursa = nazivResursa;
 	}
 	
 	@Override
 	public String toString() {
-		return "Akcija(" + 
-				", timestamp" + timestampAkcije.toString() +
-				", tipAkcije" + akcija +
-				", nazivMikroserivsa" + mikroservis +
-				", nazivResursa" + resurs + 
-				")";
+		return "Event(" + 
+				"id" + id +
+				", timestamp" + timestamp +
+				", tipAkcije" + tipAkcije +
+				", nazivMikroserivsa" + nazivMikroservisa +
+				", nazivResursa" + nazivResursa + 
+				"(";
 	}
 	
 }

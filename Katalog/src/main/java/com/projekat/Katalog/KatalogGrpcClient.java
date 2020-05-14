@@ -17,6 +17,7 @@ public class KatalogGrpcClient {
 		     .setNazivMikroservisa(nazivMikroservisa)
 		     .setTip(tip)
 		     .setNazivResursa(nazivResursa)
+		     
 		     .build();
 		
 		SystemEventsOuterClass.Response response = systemEventsBlockingStub.start(request);
