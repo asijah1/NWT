@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,8 @@ public class katalogController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	
+	
 	@GetMapping("/katalogSaId")
 	public Katalog findById(@RequestParam Long id) throws Exception {
 		return katalogService.findById(id);
@@ -50,10 +53,10 @@ public class katalogController {
 	
 	@GetMapping("/dohvatiKorisnike") //svi korisnici koji imaju aktivne ponude na katalogu
 	public List<Korisnik> findByIdKataloge(@RequestParam Long id) throws Exception {
-		ResponseEntity<Ponuda[]> response = restTemplate.getForEntity("http://ponuda/ponude/katalogSaId?id=" + id, Ponuda[].class);
+		ResponseEntity<Ponuda[]> response = restTemplate.getForEntity("http://localhost:8084/ponude/katalogSaId?id=" + id, Ponuda[].class);
 		Ponuda[] ponude = response.getBody();
 		return Arrays.asList(ponude).stream().map(ponuda ->{
-			Korisnik k = restTemplate.getForObject("http://korisnik/korisnici/korisnikSaId?id=" + ponuda.getId(), Korisnik.class);
+			Korisnik k = restTemplate.getForObject("http://localhost:8084/korisnici/korisnikSaId?id=" + ponuda.getId(), Korisnik.class);
 			return k;
 		}).collect(Collectors.toList());
 	}

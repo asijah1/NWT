@@ -33,4 +33,9 @@ public class APIService {
 		}).collect(Collectors.toList());
 	}
 	
+	public List<Korisnik> dohvatiKorisnike() {
+		ResponseEntity<Korisnik[]> response = restTemplate.getForEntity("http://localhost:8081/korisnici", Korisnik[].class);
+		Korisnik[] korisnici = response.getBody();
+		return  Arrays.asList(korisnici);
+	}
 }
