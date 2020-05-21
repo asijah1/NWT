@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projekat.Ponuda.model.Ponuda;
 import com.projekat.Ponuda.repository.PonudaRepository;
+import com.projekat.Ponuda.service.PonudaService;
 
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -40,6 +41,11 @@ public class PonudaApplication {
 			return this.discoveryClient.getInstances(applicationName);
 		}
 	}
+  
+  @Bean
+  MessageListenerAdapter listenerAdapter(PonudaService servis) {
+	  
+  }
 
   @Bean
   public CommandLineRunner demo(PonudaRepository repository) {

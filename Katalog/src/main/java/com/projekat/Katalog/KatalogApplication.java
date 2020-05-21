@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +24,8 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Source;
 
 import com.google.protobuf.Timestamp;
 import com.netflix.appinfo.InstanceInfo;
@@ -33,12 +35,14 @@ import com.projekat.Katalog.KatalogApplication;
 import com.projekat.Katalog.model.Katalog;
 import com.projekat.Katalog.repository.KatalogRepository;
 
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableEurekaClient
+@EnableBinding(Source.class) 
 public class KatalogApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(KatalogApplication.class);
@@ -87,6 +91,12 @@ public class KatalogApplication {
 			OAuth2ProtectedResourceDetails details) {
 	        return new OAuth2RestTemplate(details, oauth2ClientContext);
 	}*/
+	
+	@Bean
+	Queue queue() {
+		return new Queue("sfg-message-queue", false);
+	}
+	
 	
 	@Bean
 	public CommandLineRunner demo(KatalogRepository repository) {

@@ -2,11 +2,14 @@ package com.projekat.Katalog.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class KatalogService {
 	
 	@Autowired
 	private KatalogRepository katalogRepository;
+	
+	private RabbitTemplate rabbitTemplate; 
 
 	public List<Katalog> vratiKataloge()  {
         List<Katalog> bazaKataloga = new ArrayList<>();
@@ -66,5 +71,13 @@ public class KatalogService {
         katalogRepository.deleteById(katalogId);
         return "Katalog obrisan";
     }
+	
+	public void sendKatalogId(String idKataloga, String cijena, String idKorisnika) {
+		Map<String, String> actionmap = new HashMap<>();
+		actionmap.put("idKataloga", idKataloga);
+		actionmap.put("cijena", cijena);
+		actionmap.put("idKorisnika", idKorisnika);
+		rabbitTemplate.convertAndSend("sfg-message-queue", actionmap);
+	}
 	
 }

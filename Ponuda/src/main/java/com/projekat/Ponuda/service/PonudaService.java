@@ -2,6 +2,7 @@ package com.projekat.Ponuda.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -55,11 +56,17 @@ public class PonudaService {
 	      });
 	}
 	
-	public void deleteById(Long id) throws PonudaException{
+	public void deleteById(Long id) throws PonudaException {
 		if (!ponudaRepository.existsById(id)) {
             throw new PonudaException();
         }
         ponudaRepository.deleteById(id);
     }
 	
+	public void recieveMessage(Map<String, String> poruka) {
+		Long idKataloga = Long.valueOf(poruka.get("idKataloga"));
+		Long cijena = Long.valueOf(poruka.get("cijena"));
+		Long idKorisinka = Long.valueOf(poruka.get("idKorisnika"));
+		ponudaRepository.save(new Ponuda(idKataloga, idKorisinka, cijena));
+	}
 }
