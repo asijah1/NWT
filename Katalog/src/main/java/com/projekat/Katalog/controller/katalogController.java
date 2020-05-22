@@ -78,6 +78,12 @@ public class katalogController {
 		return katalogService.addNewKatalog(katalog);
     }
 	
+	@PostMapping("/ponuda")
+	String novaPonuda(@RequestBody Ponuda ponuda) {
+		katalogService.sendKatalogId(ponuda.getidKatalog().toString(), ponuda.getPonuda().toString(), ponuda.getidKorisnik().toString());
+		return "redirect:/Katalog/katalogSaId?id=" + ponuda.getidKatalog();
+	}
+	
 	@PutMapping("")
 	Katalog replaceKatalog(@Valid @RequestBody Katalog katalog, @RequestParam Long id) {
 		return katalogService.updateKatalog(katalog, id);

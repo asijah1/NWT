@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projekat.Ponuda.listener.KatalogListener;
 import com.projekat.Ponuda.model.Ponuda;
 import com.projekat.Ponuda.repository.PonudaRepository;
-import com.projekat.Ponuda.service.PonudaService;
+
 
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -43,8 +45,8 @@ public class PonudaApplication {
 	}
   
   @Bean
-  MessageListenerAdapter listenerAdapter(PonudaService servis) {
-	  
+  MessageListenerAdapter listenerAdapter(KatalogListener katalogListener) {
+	  return new MessageListenerAdapter(katalogListener, "recieveMessage");
   }
 
   @Bean

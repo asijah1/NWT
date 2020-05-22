@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -95,6 +98,16 @@ public class KatalogApplication {
 	@Bean
 	Queue queue() {
 		return new Queue("sfg-message-queue", false);
+	}
+	
+	@Bean
+	TopicExchange exchange() { 
+		return new TopicExchange("spring-boot-exchange");
+	}
+	
+	@Bean
+	Binding binding(Queue queue, TopicExchange exchange) {
+		return BindingBuilder.bind(queue).to(exchange).with("sfg-message-queue");
 	}
 	
 	
