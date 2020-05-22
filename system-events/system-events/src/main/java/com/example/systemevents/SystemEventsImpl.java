@@ -12,8 +12,11 @@ import com.google.protobuf.Timestamp;
 @Component
 public class SystemEventsImpl extends SystemEventsImplBase {
 	
-	@Autowired
-	AkcijaRepository akcijaRepository;
+	private final AkcijaRepository akcijaRep;
+	
+	public SystemEventsImpl(AkcijaRepository repository) {
+	    this.akcijaRep = repository;
+	  }
 	
 	@Override
 	public void start(Request request, StreamObserver<Response> responseObserver) {
@@ -36,8 +39,13 @@ public class SystemEventsImpl extends SystemEventsImplBase {
           .build();
         
         //ovdje mi baca izuzetak
-    	akcijaRepository.save(new Akcija(request.getTimestamp(), request.getNazivMikroservisa(), request.getTip(), request.getNazivResursa()));
-    	
+        Akcija novaAkcija = new Akcija(request.getTimestamp(), request.getNazivMikroservisa(), request.getTip(), request.getNazivResursa());
+        //Akcija pomocna = new Akcija();
+        System.out.println(novaAkcija.toString() + "ovo je prije spremanja u repozitorij");
+        //akcijaRep.save(pomocna);
+        //System.out.println("Uspješno predjen konstruktor bez parametara");
+        Akcija akcijaZaIspis = akcijaRep.save(novaAkcija);
+        System.out.println(akcijaZaIspis.toString() + "to je to");
     	//akcijaRepository.save(new Akcija());
         
         responseObserver.onNext(response);

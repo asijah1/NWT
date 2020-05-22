@@ -27,7 +27,7 @@ public class Akcija {
     private tipAkcije tipAkcije;
     private String nazivResursa;
     
-    protected Akcija() {}
+    public Akcija() {}
     
     public Akcija(Timestamp timestamp, String nazivMikroservisa, tipAkcije tipAkcije, String nazivResursa) {
     	
@@ -72,12 +72,12 @@ public class Akcija {
 	@Override
 	public String toString() {
 		return "Event(" + 
-				"id" + id +
-				", timestamp" + timestamp +
-				", tipAkcije" + tipAkcije +
-				", nazivMikroserivsa" + nazivMikroservisa +
-				", nazivResursa" + nazivResursa + 
-				"(";
+				"id: " + id +
+				", timestamp: " + timestamp +
+				", tipAkcije: " + tipAkcije +
+				", nazivMikroserivsa: " + nazivMikroservisa +
+				", nazivResursa: " + nazivResursa + 
+				")";
 	}
 	
 }
