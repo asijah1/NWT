@@ -1,6 +1,7 @@
 package com.projekat.Korisnik.controller;
 
 import com.projekat.Korisnik.model.Korisnik;
+import com.projekat.Korisnik.rabbitMQ.ProducerService;
 import com.projekat.Korisnik.service.KorisnikService;
 
 import java.util.List;
@@ -27,6 +28,9 @@ public class korisnikController {
 	
 	@Autowired
 	private KorisnikService korisnikService;
+	
+	@Autowired
+    ProducerService producerService;
 	
 	@RequestMapping(value = "id", method = RequestMethod.GET)
 	@ResponseBody
@@ -75,6 +79,7 @@ public class korisnikController {
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
     public void deleteKorisnik(@Valid @RequestBody Korisnik korisnik) {
         korisnikService.deleteKorisnikWithId(korisnik.getId());
+        producerService.send(korisnik.getId());
     }
  
 }	
