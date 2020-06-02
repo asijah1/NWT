@@ -5,7 +5,7 @@ export default class App extends React.Component {
         return (
             <div style={{backgroundColor: "#00203f", height:"40px", clear:"both", textAlign:"center"}} > 
                 
-          <p>Elektrotehnički fakultet u Sarajevu</p>
+          <p style={{color: "#adefd1"}}>Elektrotehnički fakultet u Sarajevu</p>
             </div>
         )
     }
