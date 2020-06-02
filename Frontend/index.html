@@ -1,64 +1,121 @@
 ﻿<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>Add React in One Minute</title>
-  </head>
-  <body>
-      <nav class="navbar navbar-default">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                  <a class="navbar-brand" href="#">Dobro došli!</a>
-              </div>
-              <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Kategorije</a></li>
-                  <li><a href="#">Shopovi</a></li>
-                  <li><a href="#">Vozila</a></li>
-                  <li><a href="#">Nekretnine</a></li>
-              </ul>
-          </div>
-      </nav>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <!-- Load our React component. -->
+    <script src="like_button.js"></script>
 
-      <div class="row">
-          <div class="col-lg-5">
-              <form>
-                  <div class="input-group">
-                      <span class="input-group-addon">Pretraga</span>
-                      <input id="msg" type="text" class="form-control" name="msg" placeholder="Tekst za pretragu...">
-                  </div>
-              </form>
-          </div>
-          <div class="col-lg-1">
-              <button type="button" class="btn btn-default">Cancel</button>
-          </div>
-              
-          <div class="col-lg-6">
-              <div class="btn-group btn-group-justified">
-                  <a href="#" class="btn btn-primary">Login</a>
-                  <a href="#" class="btn btn-primary">Registracija</a>
-              </div>
-          </div>
-      </div>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-          <div id="root"></div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-          <!-- We will put our React component inside this div. -->
-          <div id="like_button_container"></div>
-          <!-- Load React. -->
-          <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-          <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-          <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-          <!-- Load our React component. -->
-          <script src="like_button.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Dobro došli!</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Kategorije</a></li>
+                <li><a href="#">Shopovi</a></li>
+                <li><a href="#">Vozila</a></li>
+                <li><a href="#">Nekretnine</a></li>
+            </ul>
+        </div>
+    </nav>
 
-          <!-- Latest compiled and minified CSS -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <div class="row">
+        <div class="col-lg-5">
+            <form>
+                <div class="input-group">
+                    <span class="input-group-addon">Pretraga</span>
+                    <input id="msg" type="text" class="form-control" name="msg" placeholder="Tekst za pretragu...">
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-1">
+            <button type="button" class="btn btn-default">Pretraži</button>
+        </div>
 
-          <!-- jQuery library -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <div class="col-lg-6">
+            <div class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-primary">Login</a>
+                <a href="#" class="btn btn-primary">Registracija</a>
+            </div>
+        </div>
+    </div>
 
-          <!-- Latest compiled JavaScript -->
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                Vozila
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <ul class="list-group">
+                            <li class="list-group-item">Laka vozila</li>
+                            <li class="list-group-item">Teretna vozila</li>
+                            <li class="list-group-item">Dvotočkaši</li>
+                            <li class="list-group-item">Ostalo</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                Nekretnine
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Stanovi</li>
+                            <li class="list-group-item">Kuće</li>
+                            <li class="list-group-item">Zemljišta</li>
+                            <li class="list-group-item">Ostalo</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                Tehnika
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Bijela tehnika</li>
+                            <li class="list-group-item">Računari</li>
+                            <li class="list-group-item">Mobiteli</li>
+                            <li class="list-group-item">Ostalo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            
+        </div>
+    </div>
 </body>
 </html>
