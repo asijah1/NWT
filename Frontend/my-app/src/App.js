@@ -16,9 +16,9 @@ class App extends Component {
       <Router>
         
           <Header />
-          <Pocetna />
-          <Kategorije />
           <div>
+            <Route path="/kategorije" component={Kategorije} />
+            <Route path="/pocetna" component={Pocetna} />
             <Route path="/login" component={Login} />
             <Route path="/registracija" component={Registracija} />
           </div>

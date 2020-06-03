@@ -11,7 +11,7 @@ class registracija extends Component {
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
           <h2>Registracija</h2>
-          <form action="/action_page.php">
+          <form class="formRegistracija" action="/action_page.php">
               <div class="form-group">
                   <label for="ime">Ime:</label>
                   <input type="text" class="form-control" id="ime" placeholder="Enter First Name" name="ime"/>

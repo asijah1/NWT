@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 
 export default class App extends React.Component {
 
@@ -52,9 +52,9 @@ export default class App extends React.Component {
                             <a class="navbar-brand" href="#">Dobro došli!</a>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Početna</a></li>
-                            <li><a href="#">Moje ponude</a></li>
-                            <li><a href="#">Moji katalozi</a></li>
+                            <li class="active"><NavLink to="/pocetna">Početna</NavLink></li>
+                            <li><a>Moje ponude</a></li>
+                            <li><a>Moji katalozi</a></li>
                         </ul>
                     </div>
                 </nav>

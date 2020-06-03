@@ -4,3 +4,13 @@
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
+
+.btn-group {
+    float: right;
+}
+
+.btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}

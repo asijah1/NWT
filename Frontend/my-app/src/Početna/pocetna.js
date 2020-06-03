@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import './pocetna.css';
 
@@ -21,9 +21,9 @@ export class pocetna extends Component {
             </div>
 
             <div class="col-lg-6">
-                <div class="btn-group btn-group-justified">
-                    <a href="#" class="btn btn-primary">Login</a>
-                    <a href="#" class="btn btn-primary">Registracija</a>
+                <div class="btn-group">
+                <NavLink to="/login"><button type="button" class="btn btn-default">Login</button></NavLink>
+                <NavLink to="/registracija"><button type="button" class="btn btn-default">Registracija</button></NavLink>
                 </div>
             </div>
         </div>

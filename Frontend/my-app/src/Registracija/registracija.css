@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.formRegistracija {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
