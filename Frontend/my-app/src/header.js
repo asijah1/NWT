@@ -42,12 +42,22 @@ export default class App extends React.Component {
         if(this.PrikaziHeader()) {
             return (
             
-                <div className="Sve">
-                    <div style={{backgroundColor: "#00203f", paddingTop:"5px", paddingBottom:"5px", textAlign:"center" }}>
-                        {timovi.map(t => <div style={{display: "inline"}}> <Link style={{color: "#adefd1"}} to={`/${t}`}> {t} </Link> </div>)}
-                        {this.JeLiLogiran()}
+                
+                <nav class="navbar navbar-default">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">Dobro došli!</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Početna</a></li>
+                            <li><a href="#">Moje ponude</a></li>
+                            <li><a href="#">Moji katalozi</a></li>
+                        </ul>
                     </div>
-                </div>
+                </nav>
     
             )
         }

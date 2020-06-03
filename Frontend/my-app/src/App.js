@@ -7,16 +7,17 @@ import Registracija from './Registracija/registracija.js'
 import Login from './Login/login.js'
 import Header from './header'
 import Footer from './footer'
-
+import Pocetna from './Početna/pocetna.js'
+import Kategorije from './Kategorije/kategorije'
 
 class App extends Component {
   render() {
     return (
       <Router>
+        
           <Header />
-          <p>
-            <code>Elhamdulillah</code>.
-          </p>
+          <Pocetna />
+          <Kategorije />
           <div>
             <Route path="/login" component={Login} />
             <Route path="/registracija" component={Registracija} />

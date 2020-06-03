@@ -7,6 +7,7 @@ export class login extends Component {
   render() {
     return (
         <div class="container">
+          
           <h2>Login</h2>
           <form action="/action_page.php">
               <div class="form-group">
