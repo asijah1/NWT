@@ -8,6 +8,7 @@ import Header from './header'
 import Footer from './footer'
 import Pocetna from './Početna/pocetna.js'
 import Kategorije from './Kategorije/kategorije'
+import Pretraga from './Pretraga/pretraga.js'
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path="/pocetna" component={Pocetna} />
             <Route path="/login" component={Login} />
             <Route path="/registracija" component={Registracija} />
+            <Route path="/pretraga" component={Pretraga} />
           </div>
           <Footer />
       </Router>
