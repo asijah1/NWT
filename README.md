@@ -20,7 +20,7 @@
 #### URL mikroservisa:
 
 * **http://localhost:8761/service-instances** <- URL eureka-service
-* **http://localhost:8080/katalozi**
+* **http://localhost:8087/katalozi**
 * **http://localhost:8081/korisnici**
 * **http://localhost:8082/ponude** 
 * **http://localhost:8083/system-events** <- System-Events-service
