@@ -46,6 +46,12 @@ public class korisnikController {
 		return korisnikService.findById(id);
 	}
 	
+	@RequestMapping(value = "/korisnikSaNazivom", method = RequestMethod.GET)
+	public List<Korisnik> findByName(@RequestParam String name) {
+		//Long temp = Long.parseLong(lastName); //provjeriti poslije
+		return korisnikService.findByName(name);
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Korisnik> vratiSveKorisnike() {  

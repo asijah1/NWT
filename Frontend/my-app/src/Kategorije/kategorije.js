@@ -6,6 +6,8 @@ export class kategorije extends Component {
     super(props);
     this.state = {
     open1: false,
+    open2: false,
+    open3: false
   }
   this.togglePanel1 = this.togglePanel1.bind(this);
   this.togglePanel2 = this.togglePanel2.bind(this);

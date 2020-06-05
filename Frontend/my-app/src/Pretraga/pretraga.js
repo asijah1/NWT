@@ -9,19 +9,36 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 export class Pretraga extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       error: null,
       isLoaded: false,
-      korisnici: []
+      korisnici: [],
+      proizvodi: [],
+      korisniciPrikaz: false, //stanje za prikazivanje korisnika
+      proizvodiPrikaz: false //stanje za prikazivanje proizvoda
     };
   }
-
+  
+  prikaziKorisnike(e){
+    this.setState({
+      korisniciPrikaz: true, 
+      proizvodiPrikaz: false
+    })
+  }
+  prikaziProizvode(e){
+      this.setState({
+        korisniciPrikaz: false, 
+        proizvodiPrikaz: true
+      })
+  }
+  
   componentDidMount() {
-    fetch("http://localhost:8081/korisnici")
+    fetch("http://localhost:8081/korisnici/korisnikSaNazivom?name=" + this.props.inputText)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result)
+          console.log(this.props.inputText);
           this.setState({
             isLoaded: true,
             korisnici: result
@@ -31,22 +48,40 @@ export class Pretraga extends Component {
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          console.log("ovdje sam")
           this.setState({
             isLoaded: true,
             error
           });
         }
       )
+      /*fetch("http://localhost:8080/katalozi/nazivProizvoda?naziv=" + this.props.inputText)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          this.setState({
+            isLoaded: true,
+            proizvodi: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )*/
   }
   render() {
     //var kategorije = ['Vozila', 'Nekretnine', 'Tehnika'];
     //var podkategorije = [["Teska vozila", "Laka vozila", "Dvotockasi", "Ostalo"], ["Stanovi", "Kuce", "Zemljiste", "Ostalo"], ["Bijela tehnika", "Racunari", "Mobiteli", "Ostalo"]]
-    const { error, isLoaded, korisnici } = this.state;
-    console.log(this.state.korisnici);
-      if (error) {
-        return <div>Error: {error.message}</div>;
-      } else if (!isLoaded) {
+
+      if (this.state.error) {
+        return <div>Error: {this.state.error.message}</div>;
+      } else if (!this.state.isLoaded) {
         return <div>Loading...</div>;
       } else {
         return (
@@ -60,13 +95,16 @@ export class Pretraga extends Component {
                 </div>
 
                 <div class="col-lg-8">
-                  <ul>
-                    {korisnici.map(korisnik => (
-                      <li key={korisnik.id}>
-                        <Korisnik korisnik={korisnik}></Korisnik>
-                      </li>
-                    ))}
-                  </ul>
+                  <div class="well">
+                    <ul>
+                      {this.state.korisnici.map(korisnik => (
+                        <li key={korisnik.id}>
+                          <Korisnik korisnik={korisnik}></Korisnik>
+                        </li>
+                      ))}
+                      
+                    </ul>
+                  </div>
                 </div>
             </div>
         )

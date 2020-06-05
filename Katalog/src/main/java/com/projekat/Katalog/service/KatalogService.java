@@ -66,5 +66,10 @@ public class KatalogService {
         katalogRepository.deleteById(katalogId);
         return "Katalog obrisan";
     }
+
+	public List<Katalog> vratiKatalogeSaNazivom(String nazivProizvoda) {
+		return katalogRepository.findByNazivProizvoda(nazivProizvoda);
+	}
+
 	
 }

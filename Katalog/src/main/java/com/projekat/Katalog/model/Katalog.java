@@ -46,7 +46,7 @@ public class Katalog {
 
   public String getNazivProizvoda() {
 	return nazivProizvoda;
-}
+ }
 
 public void setNazivProizvoda(String nazivProizvoda) {
 	this.nazivProizvoda = nazivProizvoda;

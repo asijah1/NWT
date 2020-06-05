@@ -7,10 +7,12 @@ class Korisnik extends Component{
 
       return(
         <div className='korisnik' key={id}>
-                <p>Ime i prezime: {firstName} {lastName} </p>
-                <p>Email: {location}</p>
-                <p>Broj telefona: {email}</p>
-                <p>Lokacija: {phone}</p>
+          <div class="well">
+            <p>Ime i prezime: {firstName} {lastName} </p>
+            <p>Lokacija: {location}</p>
+            <p>Email: {email}</p>
+            <p>Broj telefona: {phone}</p>
+          </div>
         </div>
       );
     }

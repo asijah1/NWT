@@ -65,6 +65,11 @@ public class katalogController {
 	public List<Katalog> getAllKatalozi() {
 		return katalogService.vratiKataloge();
 	}
+	
+	@GetMapping("/nazivProizvoda")
+	public List<Katalog> getKatalogSaNazivom(@RequestParam String naziv) {
+		return katalogService.vratiKatalogeSaNazivom(naziv);
+	}
 	/*
 	@GetMapping("/id")
 	public Katalog findById(@PathVariable Long id) {

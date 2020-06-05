@@ -80,6 +80,18 @@ public class KorisnikService {
         korisnikRepository.deleteById(korisnikId);
         return temp;
     }
+
+	public List<Korisnik> findByName(String name) {
+		List<Korisnik> bazaKorisnika = new ArrayList<>();
+        korisnikRepository.findAll().forEach((korisnik) -> {
+        	boolean isFoundIme = korisnik.getFirstName().indexOf(name) !=-1? true: false;
+        	boolean isFoundprezime = korisnik.getLastName().indexOf(name) !=-1? true: false;
+        	if(isFoundIme || isFoundprezime)
+        		bazaKorisnika.add(korisnik);
+        });
+        
+        return bazaKorisnika;
+	}
 	
 }
 

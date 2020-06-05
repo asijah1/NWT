@@ -21,8 +21,8 @@ class App extends Component {
             <Route path="/pocetna" component={Pocetna} />
             <Route path="/login" component={Login} />
             <Route path="/registracija" component={Registracija} />
-            <Route path="/pretraga" component={Pretraga} />
           </div>
+          
           <Footer />
       </Router>
     );
