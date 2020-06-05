@@ -9,15 +9,16 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 export class Pretraga extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       error: null,
       isLoaded: false,
       korisnici: [],
       proizvodi: [],
       korisniciPrikaz: false, //stanje za prikazivanje korisnika
-      proizvodiPrikaz: false //stanje za prikazivanje proizvoda
+      proizvodiPrikaz: true //stanje za prikazivanje proizvoda
     };
+    this.prikaziKorisnike = this.prikaziKorisnike.bind(this);
+    this.prikaziProizvode = this.prikaziProizvode.bind(this);
   }
   
   prikaziKorisnike(e){
@@ -89,12 +90,13 @@ export class Pretraga extends Component {
             <div class="row">
                 <div class="col-lg-4">
                     <ul class="list-group">
+                        <li class="list-group-item" ><a onClick={this.prikaziKorisnike}>Korisnici</a></li>
                         <li class="list-group-item">Produkti</li>
-                        <li class="list-group-item">Korisnici</li>
                     </ul> 
                 </div>
 
                 <div class="col-lg-8">
+                {this.state.korisniciPrikaz ? (
                   <div class="well">
                     <ul>
                       {this.state.korisnici.map(korisnik => (
@@ -105,7 +107,8 @@ export class Pretraga extends Component {
                       
                     </ul>
                   </div>
-                </div>
+                ) : null}
+              </div>
             </div>
         )
       }
