@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './noviKatalog.css';
+//import './noviKatalog.css';
 
 export class noviKatalog extends Component {
   render() {
