@@ -3,6 +3,7 @@ package com.projekat.Katalog.controller;
 
 import java.util.List;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ import com.projekat.Katalog.service.KatalogService;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+@CrossOrigin
 @RequestMapping("/katalozi")
 @RestController
 public class katalogController {
@@ -41,6 +44,12 @@ public class katalogController {
 	public List<Katalog> getKatalogSaNazivom(@RequestParam String naziv) {
 		return katalogService.vratiKatalogeSaNazivom(naziv);
 	}
+	
+	@GetMapping("/pretragaProizvoda")
+	public List<Katalog> pretragaKataloga(@RequestParam String naziv) {
+		return katalogService.findByName(naziv);
+	}
+	
 	/*
 	@GetMapping("/id")
 	public Katalog findById(@PathVariable Long id) {

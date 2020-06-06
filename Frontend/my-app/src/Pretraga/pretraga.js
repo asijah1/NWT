@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './pretraga.css';
 import Korisnik from '../Korisnik/korisnik.js'
-const korisniciApi= "http://localhost:8081/korisnici";
-const katalogApi = '';
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
+import Katalog from '../Katalog/katalog.js'
+
+const korisniciApi= "http://localhost:8081/korisnici/korisnikSaNazivom?name=";
+const katalogApi = 'http://localhost:8087/katalozi/pretragaProizvoda?naziv=';
 
 
 export class Pretraga extends Component {
@@ -35,11 +36,10 @@ export class Pretraga extends Component {
   }
   
   componentDidMount() {
-    fetch("http://localhost:8081/korisnici/korisnikSaNazivom?name=" + this.props.inputText)
+    fetch(korisniciApi + this.props.inputText)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(this.props.inputText);
           this.setState({
             isLoaded: true,
             korisnici: result
@@ -55,11 +55,10 @@ export class Pretraga extends Component {
           });
         }
       )
-      /*fetch("http://localhost:8080/katalozi/nazivProizvoda?naziv=" + this.props.inputText)
+      fetch(katalogApi + this.props.inputText)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result)
           this.setState({
             isLoaded: true,
             proizvodi: result
@@ -74,7 +73,7 @@ export class Pretraga extends Component {
             error
           });
         }
-      )*/
+      )
   }
   render() {
     //var kategorije = ['Vozila', 'Nekretnine', 'Tehnika'];
@@ -91,7 +90,7 @@ export class Pretraga extends Component {
                 <div class="col-lg-4">
                     <ul class="list-group">
                         <li class="list-group-item" ><a onClick={this.prikaziKorisnike}>Korisnici</a></li>
-                        <li class="list-group-item">Produkti</li>
+                        <li class="list-group-item"><a onClick={this.prikaziProizvode}>Produkti</a></li>
                     </ul> 
                 </div>
 
@@ -102,6 +101,18 @@ export class Pretraga extends Component {
                       {this.state.korisnici.map(korisnik => (
                         <li key={korisnik.id}>
                           <Korisnik korisnik={korisnik}></Korisnik>
+                        </li>
+                      ))}
+                      
+                    </ul>
+                  </div>
+                ) : null}
+                {this.state.proizvodiPrikaz ? (
+                  <div class="well">
+                    <ul>
+                      {this.state.proizvodi.map(proizvod => (
+                        <li key={proizvod.id}>
+                          <Katalog proizvod={proizvod}></Katalog>
                         </li>
                       ))}
                       

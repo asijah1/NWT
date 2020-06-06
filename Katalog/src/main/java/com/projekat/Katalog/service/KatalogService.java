@@ -70,6 +70,16 @@ public class KatalogService {
 	public List<Katalog> vratiKatalogeSaNazivom(String nazivProizvoda) {
 		return katalogRepository.findByNazivProizvoda(nazivProizvoda);
 	}
-
+	
+	public List<Katalog> findByName(String name) {
+		List<Katalog> bazaKataloga = new ArrayList<>();
+		katalogRepository.findAll().forEach((katalog) -> {
+        	boolean isFoundIme = katalog.getNazivProizvoda().indexOf(name) !=-1? true: false;
+        	if(isFoundIme )
+        		bazaKataloga.add(katalog);
+        });
+        
+        return bazaKataloga;
+	}
 	
 }
