@@ -10,14 +10,12 @@ export class noviKatalog extends Component {
     super(props);
 
     this.state = {
-        katalog: {
-            nazivProizvoda: '',
-            lokacija: '',
-            povrsina: '',
-            cijena: '',
-            datumObjave:'',
-            datumZavrsetka:''
-        },
+        nazivProizvoda: '',
+        lokacija: '',
+        povrsina: '',
+        cijena: '',
+        datumObjave:'',
+        datumZavrsetka:'',
         submitted: false
     };
 
@@ -25,41 +23,40 @@ export class noviKatalog extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 }
 
-handleChange(event) {
-    const { name, value } = event.target;
-    const { katalog } = this.state;
-    this.setState({
-        katalog: {
-            ...katalog,
-            [name]: value
-        }
-    });
+handleChange(e) {
+  if (e.target.id === 'nazivProizvoda') {
+      this.setState({ nazivProizvoda: e.target.value });
+  } else if (e.target.id === 'lokacija') {
+      this.setState({ lokacija: e.target.value });
+  } else if (e.target.id === 'povrsina') {
+      this.setState({ povrsina: e.target.value });
+  } else if (e.target.id === 'cijena') {
+      this.setState({ cijena: e.target.value});
+  } else if (e.target.id === 'datumObjave') {
+      this.setState({ datumObjave: e.target.value});
+  } else if (e.target.id === 'datumZavrsetka') {
+      this.setState({ datumZavrsetka: e.target.value});
+  } 
 }
+
 
 handleSubmit(event) {
     event.preventDefault();
-
-    this.setState({ submitted: true });
-    const { katalog } = this.state;
-
-    const text = {
-      nazivProizvoda: this.state.nazivProizvoda,
-      lokacija: this.state.lokacija,
-      povrsina: this.state.povrsina,
-      cijena: this.state.cijena,
-      datumObjave: this.state.datumObjave,
-      datumZavrsetka: this.state.datumZavrsetka
+  const text = {
+    korisnikId: "1",
+    nazivProizvoda: this.state.nazivProizvoda,
+    lokacija: this.state.lokacija,
+    cijena: this.state.cijena,
+    datumObjave: this.state.datumObjave,
+    datumZavrsetka: this.state.datumZavrsetka
   }
   
   console.log(JSON.stringify(text));
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', katalogAPI);
+  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  xhr.send(JSON.stringify(text));
 
-    if (katalog.nazivProizvoda && katalog.lokacija && katalog.povrsina && katalog.cijena, katalog.datumObjave, katalog.datumZavrsetka) {
-        //ovdje ide dio sa rgistracijom kataloga
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', katalogAPI);
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        xhr.send(JSON.stringify(text));
-    }
 
 }
 
@@ -74,14 +71,14 @@ handleSubmit(event) {
             <form name="form" onSubmit={this.handleSubmit}>
               <div className={'form-group' + (submitted && !katalog.nazivProizvoda ? ' has-error' : '')}>
                 <label for="nazivProizvoda">Naziv proizvoda: </label>
-                <input type="text" class="form-control" name="nazivProizvoda" onChange={this.handleChange}/>
+                <input type="text" class="form-control" name="nazivProizvoda" id="nazivProizvoda" onChange={this.handleChange}/>
                 {submitted && !katalog.nazivProizvoda &&
                         <div className="help-block">Name of product is required</div>
                     }
               </div>
               <div className={'form-group' + (submitted && !katalog.lokacija ? ' has-error' : '')}>
                 <label for="lokacija">Lokacija: </label>
-                <select class="form-control" name="lokacija" onChange={this.handleChange}>
+                <select class="form-control" name="lokacija" id="lokacija" onChange={this.handleChange}>
                   <option value="Travnik">Travnik</option>
                   <option value="Sarajevo">Sarajevo</option>
                   <option selected value="Visoko">Visoko</option>
