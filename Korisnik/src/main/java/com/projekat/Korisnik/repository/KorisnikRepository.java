@@ -10,6 +10,7 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
   ArrayList<Korisnik> findByLastName(String lastName);
   ArrayList<Korisnik> findByFirstName(String firstName);
+  Korisnik findByEmail(String email);
   Korisnik findById(long id);
   
 }

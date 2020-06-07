@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.client.RestTemplate;
@@ -17,6 +19,7 @@ import com.Projekat.APIGateway.service.APIService;
 
 //Imports removed for conciseness
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -44,9 +47,14 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 		List<Korisnik> users = apiService.dohvatiKorisnike();
 		
         for (Korisnik user : users) {
-            String theUsername = user.getFirstName();
-            String password = "{noop}SIFRA"; 
+            String theUsername = user.getEmail();
+            String password = "{noop}" + user.getPassword(); 
             imudmc.withUser(theUsername).password(password).roles("user");
         }
 	}
+	
+	@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().authorizeRequests().anyRequest().authenticated();
+    }
 }

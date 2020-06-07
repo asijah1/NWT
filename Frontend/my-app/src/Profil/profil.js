@@ -1,48 +1,46 @@
 import React, { Component } from 'react';
-import './pretraga.css';
-import Korisnik from '../Korisnik/korisnik.js'
 import Katalog from '../Katalog/katalog.js'
 
-const korisniciApi= "http://localhost:8081/korisnici/korisnikSaNazivom?name=";
-const katalogApi = 'http://localhost:8087/katalozi/pretragaProizvoda?naziv=';
+const ponudeApi= "http://localhost:8087/katalozi"; //svi katalozi na kojima korisnik ima neke ponude
+const kataloziApi = 'http://localhost:8087/katalozi'; // svi korisnikovi katalozi
 
 
-export class Pretraga extends Component {
+export class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
-      korisnici: [],
-      proizvodi: [],
-      korisniciPrikaz: false, //stanje za prikazivanje korisnika
-      proizvodiPrikaz: true //stanje za prikazivanje proizvoda
+      ponude: [],
+      katalozi: [],
+      ponudePrikaz: false, //stanje za prikazivanje korisnika
+      kataloziPrikaz: false //stanje za prikazivanje proizvoda
     };
-    this.prikaziKorisnike = this.prikaziKorisnike.bind(this);
-    this.prikaziProizvode = this.prikaziProizvode.bind(this);
+    this.prikaziponude = this.prikaziponude.bind(this);
+    this.prikazikataloge = this.prikazikataloge.bind(this);
   }
   
-  prikaziKorisnike(e){
+  prikaziponude(e){
     this.setState({
-      korisniciPrikaz: true, 
-      proizvodiPrikaz: false
+      ponudePrikaz: true, 
+      kataloziPrikaz: false
     })
   }
-  prikaziProizvode(e){
+  prikazikataloge(e){
       this.setState({
-        korisniciPrikaz: false, 
-        proizvodiPrikaz: true
+        ponudePrikaz: false, 
+        kataloziPrikaz: true
       })
   }
   
   componentDidMount() {
-    fetch(korisniciApi + this.props.inputText)
+    fetch(ponudeApi)
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            korisnici: result
+            ponude: result
           });
         },
         // Note: it's important to handle errors here
@@ -55,13 +53,13 @@ export class Pretraga extends Component {
           });
         }
       )
-    fetch(katalogApi + this.props.inputText)
+    fetch(kataloziApi)
     .then(res => res.json())
     .then(
       (result) => {
         this.setState({
           isLoaded: true,
-          proizvodi: result
+          katalozi: result
         });
       },
       // Note: it's important to handle errors here
@@ -89,30 +87,30 @@ export class Pretraga extends Component {
             <div class="row">
                 <div class="col-lg-4">
                     <ul class="list-group">
-                        <li class="list-group-item" ><a onClick={this.prikaziKorisnike}>Korisnici</a></li>
-                        <li class="list-group-item"><a onClick={this.prikaziProizvode}>Produkti</a></li>
+                        <li class="list-group-item" ><a onClick={this.prikaziponude}>Ponude (ovo je trebalo da prikazuje samo korisnikove ponude)</a></li>
+                        <li class="list-group-item"><a onClick={this.prikazikataloge}>Katalozi(ovo je trebalo da prikazuje samo korisnikove kataloge)</a></li>
                     </ul> 
                 </div>
 
                 <div class="col-lg-8">
-                {this.state.korisniciPrikaz ? (
+                {this.state.ponudePrikaz ? (
                   <div class="well">
                     <ul>
-                      {this.state.korisnici.map(korisnik => (
-                        <li key={korisnik.id}>
-                          <Korisnik korisnik={korisnik}></Korisnik>
+                      {this.state.ponude.map(katalog => (
+                        <li>
+                          <Katalog proizvod={katalog}></Katalog>
                         </li>
                       ))}
                       
                     </ul>
                   </div>
                 ) : null}
-                {this.state.proizvodiPrikaz ? (
+                {this.state.kataloziPrikaz ? (
                   <div class="well">
                     <ul>
-                      {this.state.proizvodi.map(proizvod => (
-                        <li key={proizvod.id}>
-                          <Katalog proizvod={proizvod}></Katalog>
+                      {this.state.katalozi.map(katalog => (
+                        <li >
+                          <Katalog proizvod={katalog}></Katalog>
                         </li>
                       ))}
                       
@@ -126,4 +124,4 @@ export class Pretraga extends Component {
   }
 }
 
-export default Pretraga;
+export default Profil;

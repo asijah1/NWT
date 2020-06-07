@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState  } from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -8,24 +8,27 @@ import Header from './header'
 import Footer from './footer'
 import Pocetna from './Početna/pocetna.js'
 import Kategorije from './Kategorije/kategorije'
-import Pretraga from './Pretraga/pretraga.js'
+import NovaPonuda from './NovaPonuda/novaPonuda.js'
+import Profil from './Profil/profil.js'
 
-class App extends Component {
-  render() {
+export class App extends Component {
+  
+  render(){
+    
     return (
       <Router>
-        
           <Header />
           <div>
             <Route path="/kategorije" component={Kategorije} />
             <Route path="/pocetna" component={Pocetna} />
             <Route path="/login" component={Login} />
             <Route path="/registracija" component={Registracija} />
+            <Route path="/dodajPonudu" component={NovaPonuda} />
+            <Route path="/profil" component={Profil} />
           </div>
-          
           <Footer />
       </Router>
-    );
+    ) ;
   }
 }
 

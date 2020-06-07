@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import com.Projekat.APIGateway.model.Korisnik;
 import com.Projekat.APIGateway.model.Ponuda;
 import com.Projekat.APIGateway.service.APIService;
 
+@CrossOrigin(origins="*")
 @Controller
 @RequestMapping(path="/")
 public class APIController {

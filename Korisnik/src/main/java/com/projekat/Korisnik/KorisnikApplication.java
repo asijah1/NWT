@@ -45,11 +45,11 @@ public class KorisnikApplication {
   public CommandLineRunner demo(KorisnikRepository repository) {
     return (args) -> {
       // save a few customers
-      repository.save(new Korisnik("Jack", "Bauer", "Visoko", "Iomanovic1@etf.unsa.ba", "062/111-111"));
-      repository.save(new Korisnik("Chloe", "O'Brian", "Visoko", "Iomanovic1@etf.unsa.ba", "062/111-111"));
-      repository.save(new Korisnik("Kim", "Bauer", "Visoko", "Iomanovic1@etf.unsa.ba", "062/111-111"));
-      repository.save(new Korisnik("David", "Palmer", "Visoko", "Iomanovic1@etf.unsa.ba", "062/111-111"));
-      repository.save(new Korisnik("Michelle", "Dessler", "Visoko", "Iomanovic1@etf.unsa.ba", "062/111-111"));
+      repository.save(new Korisnik("Jack", "Bauer", "Visoko", "io1@etf.unsa.ba", "062/111-111", "sifra"));
+      repository.save(new Korisnik("Chloe", "O'Brian", "Visoko", "io2@etf.unsa.ba", "062/111-111", "sifra"));
+      repository.save(new Korisnik("Kim", "Bauer", "Visoko", "io3@etf.unsa.ba", "062/111-111", "sifra"));
+      repository.save(new Korisnik("David", "Palmer", "Visoko", "io4@etf.unsa.ba", "062/111-111", "sifra"));
+      repository.save(new Korisnik("Michelle", "Dessler", "Visoko", "io5@etf.unsa.ba", "062/111-111", "sifra"));
 
       // fetch all customers
       log.info("Customers found with findAll():");

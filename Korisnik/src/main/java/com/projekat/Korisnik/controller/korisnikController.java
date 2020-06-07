@@ -43,6 +43,12 @@ public class korisnikController {
 		return korisnikService.findById(id);
 	}
 	
+	@RequestMapping(value = "/email", method = RequestMethod.GET)
+	public Korisnik findByEmail(@RequestParam String email) {
+		//Long temp = Long.parseLong(lastName); //provjeriti poslije
+		return korisnikService.findByEmail(email);
+	}
+	
 	@RequestMapping(value = "/korisnikSaNazivom", method = RequestMethod.GET)
 	public List<Korisnik> findByName(@RequestParam String name) {
 		//Long temp = Long.parseLong(lastName); //provjeriti poslije
@@ -73,6 +79,15 @@ public class korisnikController {
     Korisnik newKorisnik(@Valid @RequestBody Korisnik korisnik) {
         //return korisnikService.save(korisnik);
 		return korisnikService.createKorisnik(korisnik);
+    }
+	
+	@PostMapping("/logovanje")
+    Korisnik logovanje(@RequestBody String ime, @RequestBody String sifra) {
+        //return korisnikService.save(korisnik);
+		Korisnik k = korisnikService.findByFirstName(ime);
+		if(k.getPassword() == sifra)
+			return k;
+		return null;
     }
 	
 	@PutMapping("")
