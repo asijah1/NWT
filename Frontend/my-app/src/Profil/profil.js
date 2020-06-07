@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Katalog from '../Katalog/katalog.js'
-
+import {NavLink} from 'react-router-dom';
+import './profil.css';
 const ponudeApi= "http://localhost:8087/katalozi"; //svi katalozi na kojima korisnik ima neke ponude
 const kataloziApi = 'http://localhost:8087/katalozi'; // svi korisnikovi katalozi
 
@@ -83,44 +84,51 @@ export class Profil extends Component {
         return <div>Loading...</div>;
       } else {
         return (
-          
-            <div class="row">
-                <div class="col-lg-4">
-                    <ul class="list-group">
-                        <li class="list-group-item" ><a onClick={this.prikaziponude}>Ponude (ovo je trebalo da prikazuje samo korisnikove ponude)</a></li>
-                        <li class="list-group-item"><a onClick={this.prikazikataloge}>Katalozi(ovo je trebalo da prikazuje samo korisnikove kataloge)</a></li>
-                    </ul> 
+          <div class="row">
+            <div class="row" >
+            <div class="col-lg-11"></div>
+              <div class="col-lg-1">
+                <div class="btn-group">
+                  <NavLink to="/noviKatalog"><button type="button"  class="btn btn-default">Dodaj katalog</button></NavLink>
                 </div>
-
-                <div class="col-lg-8">
-                {this.state.ponudePrikaz ? (
-                  <div class="well">
-                    <ul>
-                      {this.state.ponude.map(katalog => (
-                        <li>
-                          <Katalog proizvod={katalog}></Katalog>
-                        </li>
-                      ))}
-                      
-                    </ul>
-                  </div>
-                ) : null}
-                {this.state.kataloziPrikaz ? (
-                  <div class="well">
-                    <ul>
-                      {this.state.katalozi.map(katalog => (
-                        <li >
-                          <Katalog proizvod={katalog}></Katalog>
-                        </li>
-                      ))}
-                      
-                    </ul>
-                  </div>
-                ) : null}
               </div>
             </div>
-        )
-      }
+            <div class="col-lg-4">
+                <ul class="list-group">
+                    <li class="list-group-item" ><a onClick={this.prikaziponude}>Ponude (ovo je trebalo da prikazuje samo korisnikove ponude)</a></li>
+                    <li class="list-group-item"><a onClick={this.prikazikataloge}>Katalozi(ovo je trebalo da prikazuje samo korisnikove kataloge)</a></li>
+                </ul> 
+            </div>
+
+            <div class="col-lg-8">
+            {this.state.ponudePrikaz ? (
+              <div class="well">
+                <ul>
+                  {this.state.ponude.map(katalog => (
+                    <li>
+                      <Katalog proizvod={katalog}></Katalog>
+                    </li>
+                  ))}
+                  
+                </ul>
+              </div>
+            ) : null}
+            {this.state.kataloziPrikaz ? (
+              <div class="well">
+                <ul>
+                  {this.state.katalozi.map(katalog => (
+                    <li >
+                      <Katalog proizvod={katalog}></Katalog>
+                    </li>
+                  ))}
+                  
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )
+    }
   }
 }
 

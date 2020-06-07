@@ -10,7 +10,7 @@ import Pocetna from './Početna/pocetna.js'
 import Kategorije from './Kategorije/kategorije'
 import NovaPonuda from './NovaPonuda/novaPonuda.js'
 import Profil from './Profil/profil.js'
-
+import NoviKatalog from './NoviKatalog/noviKatalogSaValidacijomNaFrontendu.js'
 export class App extends Component {
   
   render(){
@@ -25,6 +25,7 @@ export class App extends Component {
             <Route path="/registracija" component={Registracija} />
             <Route path="/dodajPonudu" component={NovaPonuda} />
             <Route path="/profil" component={Profil} />
+            <Route path="/noviKatalog" component={NoviKatalog} />
           </div>
           <Footer />
       </Router>

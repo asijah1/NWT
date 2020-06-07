@@ -53,8 +53,6 @@ export default class App extends React.Component {
                         </div>
                         <ul class="nav navbar-nav">
                             <li class="active"><NavLink to="/pocetna">Početna</NavLink></li>
-                            <li><a>Moje ponude</a></li>
-                            <li><a>Moji katalozi</a></li>
                         </ul>
                     </div>
                 </nav>
